@@ -1,5 +1,6 @@
 use num_bigint::BigUint;
 
+// Source of randomness from a BigUint.
 pub struct Randomness {
     remainder : BigUint,
     consumed: BigUint
