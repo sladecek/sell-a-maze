@@ -1,4 +1,5 @@
-use hash2maze::{generator::Generator, randomness::Randomness, square_builder::Builder, svg_painter::paint_shapes};
+use hash2maze::{generator::Generator, randomness::Randomness, square_builder::Builder, svg_painter::paint_shapes, 
+    cairo::CairoFiles};
 use num_bigint::BigUint;
 use std::{str::FromStr, fs::File, io::Write};
 
@@ -9,13 +10,18 @@ fn main() {
         ).unwrap(),
         BigUint::from(10u32).pow(100));
 
-    let builder = Builder::new(4, 4);
+    let builder = Builder::new(400, 400);
     let (graph, shapes) = builder.build();
     let mut generator = Generator::new();
     let instance = generator.generate(&graph, &mut randomness);
-    print!("instance {:?}", instance);
-    // save graph, instance, solution for cairo
+    
     // paint as svg
-
-    File::create("maze.svg").unwrap().write(paint_shapes(&shapes, &instance).as_bytes());
+    File::create("maze.svg").unwrap().write(paint_shapes(&shapes, &instance).as_bytes()).unwrap();
+    
+    
+    // save graph, instance, solution for cairo
+    let cairo = CairoFiles::new(&graph);
+    cairo.create_structure_file("maze.mas", &graph);
+    cairo.create_instance_file("maze.mai", &graph, &instance);
+    cairo.create_path_file("maze.map", &graph, &instance);
 }

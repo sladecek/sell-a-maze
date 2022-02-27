@@ -3,8 +3,8 @@ use log::error;
 
 pub struct Graph {
     rooms: Vec<Vec<i32>>,
-    wall_room1: Vec<i32>,
-    wall_room2: Vec<i32>,
+    pub wall_room1: Vec<i32>,
+    pub wall_room2: Vec<i32>,
     pub start_room: i32,
     pub target_room: i32,
 }
