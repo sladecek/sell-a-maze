@@ -1,6 +1,6 @@
-use hash2maze::{generator::Generator, randomness::Randomness, square_builder::Builder};
+use hash2maze::{generator::Generator, randomness::Randomness, square_builder::Builder, svg_painter::paint_shapes};
 use num_bigint::BigUint;
-use std::str::FromStr;
+use std::{str::FromStr, fs::File, io::Write};
 
 fn main() {
     let mut randomness=Randomness::new(
@@ -9,11 +9,13 @@ fn main() {
         ).unwrap(),
         BigUint::from(10u32).pow(100));
 
-    let mut builder = Builder::new(4, 4);
+    let builder = Builder::new(4, 4);
     let (graph, shapes) = builder.build();
     let mut generator = Generator::new();
     let instance = generator.generate(&graph, &mut randomness);
     print!("instance {:?}", instance);
     // save graph, instance, solution for cairo
     // paint as svg
+
+    File::create("maze.svg").unwrap().write(paint_shapes(&shapes, &instance).as_bytes());
 }
