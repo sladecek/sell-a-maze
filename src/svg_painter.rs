@@ -1,5 +1,6 @@
 use crate::{
-    instance::{self, Instance},
+    instance::{
+        Instance},
     shapes::{Mapper, Shapes, WallType},
 };
 use xmlwriter::{Options, XmlWriter};

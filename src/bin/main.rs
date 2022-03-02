@@ -10,7 +10,7 @@ fn main() {
         ).unwrap(),
         BigUint::from(10u32).pow(100));
 
-    let builder = Builder::new(400, 400);
+    let builder = Builder::new(3, 3);
     let (graph, shapes) = builder.build();
     let mut generator = Generator::new();
     let instance = generator.generate(&graph, &mut randomness);

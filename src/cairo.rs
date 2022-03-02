@@ -43,13 +43,13 @@ impl CairoFiles {
 
     pub fn create_path_file(&self, name: &str, graph: &Graph, instance: &Instance) {
         let mut f = File::create(name).unwrap();
-        writeln!(&f, "{}", instance.solution.len());
         for i in 0..instance.solution.len() {
             let r1 = instance.solution[i];
-            writeln!(&f, "{}", self.room_primes[r1 as usize]);
+            writeln!(&f, "{}", r1);
             if i < instance.solution.len()-1 {
                 let r2 = instance.solution[i+1];
-                writeln!(&f, "{}", self.room_primes[r1 as usize]*self.room_primes[r2 as usize]);
+                let w = graph.get_wall_between_rooms(r1, r2);
+                writeln!(&f, "{}", w);
             }        
         }
     }

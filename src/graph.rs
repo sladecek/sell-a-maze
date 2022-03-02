@@ -65,6 +65,17 @@ impl Graph {
             panic!("unknown room");
         }
     }
+
+    pub fn get_wall_between_rooms(&self, room1: i32, room2: i32) -> i32 {
+        let walls1 = self.get_walls(room1);
+        let walls2 = self.get_walls(room2);
+        for w1 in walls1 {
+            if walls2.into_iter().find(|w2| w1 == *w2).is_some() {
+                return *w1;
+            }
+        }
+        panic!("rooms have no wall in common");
+    }
 }
 
 #[test]
