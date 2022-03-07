@@ -1,8 +1,9 @@
-pub mod randomness;
 pub mod cairo;
 pub mod generator;
 pub mod graph;
-pub mod shapes;
+pub mod handler;
 pub mod instance;
+pub mod randomness;
+pub mod shapes;
 pub mod square_builder;
 pub mod svg_painter;
