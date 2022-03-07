@@ -35,7 +35,6 @@ impl CairoFiles {
 
     pub fn create_instance_file(&self, name: &str, graph: &Graph, instance: &Instance) {
         let mut f = File::create(name).unwrap();
-        writeln!(&f, "{}", graph.wall_count());
         for w in 0..graph.wall_count() {
             writeln!(&f, "{}", if instance.is_wall_closed(w) {1} else {0});    
         }
@@ -43,6 +42,7 @@ impl CairoFiles {
 
     pub fn create_path_file(&self, name: &str, graph: &Graph, instance: &Instance) {
         let mut f = File::create(name).unwrap();
+        writeln!(&f, "{}", instance.solution.len());
         for i in 0..instance.solution.len() {
             let r1 = instance.solution[i];
             writeln!(&f, "{}", r1);
