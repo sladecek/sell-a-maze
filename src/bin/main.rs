@@ -1,4 +1,4 @@
-use hash2maze::{generator::Generator, randomness::Randomness, square_builder::Builder, svg_painter::paint_shapes, 
+use sell_a_maze::{generator::Generator, randomness::Randomness, square_builder::Builder, svg_painter::paint_shapes, 
     cairo::CairoFiles};
 use num_bigint::BigUint;
 use std::{str::FromStr, fs::File, io::Write};
