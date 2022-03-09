@@ -8,3 +8,4 @@ pub mod rectangular_builder;
 pub mod shapes;
 pub mod svg_painter;
 pub mod triangular_builder;
+pub mod hexagonal_builder;
