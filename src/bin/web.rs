@@ -1,6 +1,8 @@
 use actix_web::{self, middleware::Logger, App, HttpServer};
+use actix_files as fs;
 use env_logger;
 use sell_a_maze::handler;
+
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
@@ -20,7 +22,12 @@ async fn main() -> std::io::Result<()> {
         App::new()
             .wrap(Logger::default())
             .wrap(Logger::new("%a %{User-Agent}i"))
-//            .data(db.clone())
+            .service(
+                fs::Files::new("/", "static")
+                    .show_files_listing()
+                    .use_last_modified(true),
+            )
+            //            .data(db.clone())
 //            .data(a.clone())
 //            .data(today_utc)
             // .service(handler::contract_current_get)
