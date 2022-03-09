@@ -1,4 +1,4 @@
-use sell_a_maze::{generator::Generator, randomness::Randomness, square_builder::Builder, svg_painter::paint_shapes, 
+use sell_a_maze::{generator::Generator, randomness::Randomness, rectangular_builder, triangular_builder, svg_painter::paint_shapes, 
     cairo::CairoFiles};
 use num_bigint::BigUint;
 use std::{str::FromStr, fs::File, io::Write};
@@ -10,7 +10,8 @@ fn main() {
         ).unwrap(),
         BigUint::from(10u32).pow(100));
 
-    let builder = Builder::new(3, 3);
+  //  let builder = rectangular_builder::Builder::new(3, 3);
+  let builder = triangular_builder::Builder::new(50);
     let (graph, shapes) = builder.build();
     let mut generator = Generator::new();
     let instance = generator.generate(&graph, &mut randomness);

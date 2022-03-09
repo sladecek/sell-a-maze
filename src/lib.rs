@@ -4,6 +4,7 @@ pub mod graph;
 pub mod handler;
 pub mod instance;
 pub mod randomness;
+pub mod rectangular_builder;
 pub mod shapes;
-pub mod square_builder;
 pub mod svg_painter;
+pub mod triangular_builder;
