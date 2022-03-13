@@ -1,13 +1,20 @@
 use crate::{
-    instance::{
-        Instance},
+    instance::Instance,
     shapes::{Mapper, Shapes, WallType},
 };
 use xmlwriter::{Options, XmlWriter};
 
 const SVG_URL: &str = "http://www.w3.org/2000/svg";
 
-fn paint_line(xml: &mut XmlWriter, mapper: &Mapper, x1: i32, y1: i32, x2: i32, y2: i32, style: &str) {
+fn paint_line(
+    xml: &mut XmlWriter,
+    mapper: &Mapper,
+    x1: i32,
+    y1: i32,
+    x2: i32,
+    y2: i32,
+    style: &str,
+) {
     xml.start_element("line");
     xml.write_attribute("xmlns", SVG_URL);
     xml.write_attribute("x1", &mapper.map_x(x1, y1));
@@ -18,6 +25,45 @@ fn paint_line(xml: &mut XmlWriter, mapper: &Mapper, x1: i32, y1: i32, x2: i32, y
     xml.end_element();
 }
 
+fn paint_circle(xml: &mut XmlWriter, mapper: &Mapper, cx: i32, cy: i32, radius: i32, style: &str) {
+    xml.start_element("circle");
+    xml.write_attribute("xmlns", SVG_URL);
+    xml.write_attribute("cx", &mapper.map_x(cx, cy));
+    xml.write_attribute("cy", &mapper.map_y(cx, cy));
+    xml.write_attribute("r", &format!("{}",radius));
+    xml.write_attribute("fill", "none");
+    xml.write_attribute("style", style);
+    xml.end_element();
+}
+
+fn paint_arc(
+    xml: &mut XmlWriter,
+    mapper: &Mapper,
+    x1: i32,
+    y1: i32,
+    x2: i32,
+    y2: i32,
+    style: &str,
+) {
+    assert!(y1 == y2, "arc segment must be defined on the same diameter");
+
+    xml.start_element("path");
+    xml.write_attribute("xmlns", SVG_URL);
+
+    let mx1 = &mapper.map_x(x1, y1);
+    let my1 = &mapper.map_y(x1, y1);
+    let mx2 = &mapper.map_x(x2, y2);
+    let my2 = &mapper.map_y(x2, y2);
+
+    let pth = format!("M{} {} A{} {} 0 0 1 {} {}", mx1, my1, y2, y2, mx2, my2);
+
+    xml.write_attribute("d", &pth);
+    xml.write_attribute("style", style);
+    xml.write_attribute("fill", "none");
+    xml.end_element();
+}
+
+
 fn paint_walls(xml: &mut XmlWriter, shapes: &Shapes, instance: &Instance) {
     for wall in &shapes.walls {
         let style = match wall.t {
@@ -25,7 +71,33 @@ fn paint_walls(xml: &mut XmlWriter, shapes: &Shapes, instance: &Instance) {
             WallType::Outer => "stroke:black;stroke-width:3",
         };
         if (wall.wall < 0) || instance.is_wall_closed(wall.wall) {
-            paint_line(xml, &shapes.mapper, wall.x1, wall.y1, wall.x2, wall.y2, style);
+            if shapes.is_polar && wall.y1 == wall.y2 {
+                // lines in polar coordinates are arcs
+                if wall.x1 == wall.x2 {
+                    // special case - full circle
+                    paint_circle(xml, &shapes.mapper, 0, 0, wall.y1, style);
+                } else {
+                    paint_arc(
+                        xml,
+                        &shapes.mapper,
+                        wall.x1,
+                        wall.y1,
+                        wall.x2,
+                        wall.y2,
+                        style,
+                    )
+                }
+            } else {
+                paint_line(
+                    xml,
+                    &shapes.mapper,
+                    wall.x1,
+                    wall.y1,
+                    wall.x2,
+                    wall.y2,
+                    style,
+                );
+            }
         }
         /*        String style = "";
 

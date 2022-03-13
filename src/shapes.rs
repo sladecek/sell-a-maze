@@ -1,46 +1,93 @@
+use std::f64::consts::PI;
 
 /// Collection of printable shapes.
 
+pub const ANGLE_2PI: i32 = 0x1000000;
+
 #[derive(Debug)]
+
 pub struct Shapes {
-    pub is_polar:bool,
-    pub height:i32,
-    pub width:i32,
-    pub margin:i32,
+    pub is_polar: bool,
+    pub height: i32,
+    pub width: i32,
+    pub margin: i32,
     pub floors: Vec<Floor>,
     pub walls: Vec<Wall>,
-    pub mapper: Mapper
+    pub mapper: Mapper,
 }
 
 impl Shapes {
-    pub fn new(is_polar: bool, height: i32, width:i32, margin: i32) -> Self {
-        Shapes { is_polar, height, width, margin, floors:vec!(), walls: vec!(), mapper: Mapper::new(is_polar, height, width, margin)}
+    pub fn new(is_polar: bool, height: i32, width: i32, margin: i32) -> Self {
+        Shapes {
+            is_polar,
+            height,
+            width,
+            margin,
+            floors: vec![],
+            walls: vec![],
+            mapper: Mapper::new(is_polar, height, width, margin),
+        }
     }
 
-    pub fn add_floor(&mut self, room:i32, x:i32, y:i32) {
-        self.floors.push(Floor{room, x,y})
+    pub fn add_floor(&mut self, room: i32, x: i32, y: i32) {
+        self.floors.push(Floor { room, x, y })
     }
 
-    pub fn add_outer_wall(&mut self, x1: i32, y1: i32, x2: i32, y2: i32, right_face: i32, left_face: i32) {
-        self.walls.push(Wall{t:WallType::Outer, wall: -1, right_face, left_face,x1, y1,x2,y2 });
+    pub fn add_outer_wall(
+        &mut self,
+        x1: i32,
+        y1: i32,
+        x2: i32,
+        y2: i32,
+        right_face: i32,
+        left_face: i32,
+    ) {
+        self.walls.push(Wall {
+            t: WallType::Outer,
+            wall: -1,
+            right_face,
+            left_face,
+            x1,
+            y1,
+            x2,
+            y2,
+        });
     }
 
-    pub fn add_inner_wall(&mut self, wall: i32, x1: i32, y1: i32, x2: i32, y2: i32, right_face: i32, left_face: i32) {
-        self.walls.push(Wall{t:WallType::Inner, wall, right_face, left_face,x1, y1,x2,y2 });
+    pub fn add_inner_wall(
+        &mut self,
+        wall: i32,
+        x1: i32,
+        y1: i32,
+        x2: i32,
+        y2: i32,
+        right_face: i32,
+        left_face: i32,
+    ) {
+        self.walls.push(Wall {
+            t: WallType::Inner,
+            wall,
+            right_face,
+            left_face,
+            x1,
+            y1,
+            x2,
+            y2,
+        });
     }
 }
-
 
 #[derive(Debug)]
 pub struct Floor {
     pub room: i32,
     pub x: i32,
-    pub y: i32
-} 
+    pub y: i32,
+}
 
 #[derive(Debug)]
 pub enum WallType {
-    Inner, Outer
+    Inner,
+    Outer,
 }
 
 #[derive(Debug)]
@@ -52,13 +99,11 @@ pub struct Wall {
     pub x1: i32,
     pub y1: i32,
     pub x2: i32,
-    pub y2: i32
+    pub y2: i32,
 }
 
-
 #[derive(Debug)]
-pub struct Mapper
-{
+pub struct Mapper {
     pub is_polar: bool,
     pub canvas_height: i32,
     pub canvas_width: i32,
@@ -66,21 +111,46 @@ pub struct Mapper
     pub zero_point_y: i32,
 }
 
-impl Mapper
-{
+impl Mapper {
     pub fn new(is_polar: bool, height: i32, width: i32, margin: i32) -> Self {
         if is_polar {
-            unimplemented!()
+            Mapper {
+                is_polar,
+                canvas_height: height + 2 * margin,
+                canvas_width: width + 2 * margin,
+                zero_point_x: margin + height / 2,
+                zero_point_y: margin + width / 2,
+            }
         } else {
-            Mapper{is_polar, canvas_height: height + 2*margin, canvas_width: width+2*margin, zero_point_x: margin, zero_point_y: margin}
+            Mapper {
+                is_polar,
+                canvas_height: height + 2 * margin,
+                canvas_width: width + 2 * margin,
+                zero_point_x: margin,
+                zero_point_y: margin,
+            }
         }
     }
 
-    pub fn map_x(&self, x: i32, _y: i32) -> i32 {
-        self.zero_point_x + x
+    pub fn map_x(&self, x: i32, y: i32) -> i32 {
+        self.zero_point_x
+            + if self.is_polar {
+                ((y as f64) * get_angle_rad(x).cos()).floor() as i32
+            } else {
+                x
+            }
     }
 
-    pub fn map_y(&self, _x: i32, y: i32) -> i32 {
-        self.zero_point_y + y
+    pub fn map_y(&self, x: i32, y: i32) -> i32 {
+        self.zero_point_y
+            + if self.is_polar {
+                ((y as f64) * get_angle_rad(x).sin()).floor() as i32
+            } else {
+                y
+            }
     }
+}
+
+fn get_angle_rad(angle: i32) -> f64 {
+    2f64 * PI * (angle as f64) / (ANGLE_2PI as f64)
 }
