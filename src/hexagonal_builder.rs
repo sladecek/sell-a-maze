@@ -7,9 +7,9 @@ pub struct Builder {
 }
 
  // Radius of the hexagon.
-const hP: i32 = 20;
+const hP: i32 = 200;
  /// Half-height of the hexagon
-const hH: i32 = 17; // TODO f32::floor((hP as f32) * f32::sqrt(3f32) / 2f32) as i32;
+const hH: i32 = 170; // TODO f32::floor((hP as f32) * f32::sqrt(3f32) / 2f32) as i32;
 
 
 impl  Builder {
@@ -46,6 +46,7 @@ impl  Builder {
 
                 //LOGGER.log(Level.FINE, "addRoom " + r + " y=" + y + " x=" + x + " center=" + center);
 
+                shapes.add_floor(r, center.0, center.1);
                 //makeFloor(r, center);
 
                 // make walls

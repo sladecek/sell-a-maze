@@ -2,6 +2,8 @@ use crate::{
     instance::Instance,
     shapes::{Mapper, Shapes, WallType},
 };
+use std::collections::HashSet;
+use std::iter::FromIterator;
 use xmlwriter::{Options, XmlWriter};
 
 const SVG_URL: &str = "http://www.w3.org/2000/svg";
@@ -30,7 +32,7 @@ fn paint_circle(xml: &mut XmlWriter, mapper: &Mapper, cx: i32, cy: i32, radius: 
     xml.write_attribute("xmlns", SVG_URL);
     xml.write_attribute("cx", &mapper.map_x(cx, cy));
     xml.write_attribute("cy", &mapper.map_y(cx, cy));
-    xml.write_attribute("r", &format!("{}",radius));
+    xml.write_attribute("r", &format!("{}", radius));
     xml.write_attribute("fill", "none");
     xml.write_attribute("style", style);
     xml.end_element();
@@ -63,6 +65,15 @@ fn paint_arc(
     xml.end_element();
 }
 
+fn paint_mark(xml: &mut XmlWriter, mapper: &Mapper, cx: i32, cy: i32, radius: i32, fill: &str) {
+    xml.start_element("circle");
+    xml.write_attribute("xmlns", SVG_URL);
+    xml.write_attribute("cx", &mapper.map_x(cx, cy));
+    xml.write_attribute("cy", &mapper.map_y(cx, cy));
+    xml.write_attribute("r", &format!("{}", radius));
+    xml.write_attribute("fill", fill);
+    xml.end_element();
+}
 
 fn paint_walls(xml: &mut XmlWriter, shapes: &Shapes, instance: &Instance) {
     for wall in &shapes.walls {
@@ -99,42 +110,34 @@ fn paint_walls(xml: &mut XmlWriter, shapes: &Shapes, instance: &Instance) {
                 );
             }
         }
-        /*        String style = "";
-
-        switch (wallType) {
-            case outerWall:
-                style = "stroke:" + printStyle.getOuterWallColor().toSvg() + ";stroke-width:"
-                        + printStyle.getOuterWallWidth();
-                break;
-            case innerWall:
-                style = "stroke:" + printStyle.getInnerWallColor().toSvg() + ";stroke-width:"
-                        + printStyle.getInnerWallWidth();
-                break;
-
-            case noWall:
-                if (printStyle.isPrintAllWalls()) {
-                    style = "stroke:" + printStyle.getDebugWallColor().toSvg() + ";stroke-width:"
-                            + printStyle.getInnerWallWidth();
-                }
-                break;
-            default:
-                break;
-
-        }
-        */
-        //if (!style.isEmpty()) {
-        /*   if (doc.getContext().isPolarCoordinates() && p1.getY() == p2.getY()) {
-            if (p1.getX() == 0 && p2.getX() == 0) {
-                doc.printCircle(new Point2DInt(0, 0), "none", p1.getY(), false, style);
-            } else {
-                doc.printArcSegment(p1, p2, style);
-            }
-        } else {
-            */
     }
 }
 
-pub fn paint_shapes(shapes: &Shapes, instance: &Instance) -> String {
+pub fn paint_marks(xml: &mut XmlWriter, with_solution: bool, shapes: &Shapes, instance: &Instance) {
+    let mut solution_set = HashSet::new();
+    if with_solution {
+        solution_set = HashSet::from_iter(&instance.solution);
+    }
+    for f in &shapes.floors {
+        let mut radius = 0;
+        let mut fill = "";
+        if f.room == instance.start_room {
+            radius = 16;
+            fill = "rgb(255,0,0)"
+        } else if f.room == instance.target_room {
+            radius = 16;
+            fill = "rgb(0,255,0)"
+        } else if solution_set.contains(&f.room) {
+            radius = 6;
+            fill = "rgb(120,120,120)";
+        }
+        if radius > 0 {
+            paint_mark(xml, &shapes.mapper, f.x, f.y, radius, fill);
+        }
+    }
+}
+
+pub fn paint_shapes(with_solution: bool, shapes: &Shapes, instance: &Instance) -> String {
     let mut xml = XmlWriter::new(Options::default());
     xml.start_element("svg");
     xml.write_attribute("xmlns", SVG_URL);
@@ -145,12 +148,8 @@ pub fn paint_shapes(shapes: &Shapes, instance: &Instance) -> String {
             0, 0, shapes.mapper.canvas_width, shapes.mapper.canvas_height
         ),
     );
-    //w.start_element("text");
-    // We can write any object that implements `fmt::Display`.
-    //w.write_attribute("x", &10);
-    //w.write_attribute("y", &20);
-    //w.write_text_fmt(format_args!("length is {}", 5));
     paint_walls(&mut xml, &shapes, instance);
+    paint_marks(&mut xml, with_solution, shapes, instance);
     let result = xml.end_document();
     result
 }

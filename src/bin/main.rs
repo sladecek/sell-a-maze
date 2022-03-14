@@ -1,7 +1,9 @@
-use sell_a_maze::{generator::Generator, randomness::Randomness, circular_builder, rectangular_builder, triangular_builder, hexagonal_builder, svg_painter::paint_shapes, 
-    cairo::CairoFiles};
 use num_bigint::BigUint;
-use std::{str::FromStr, fs::File, io::Write};
+use sell_a_maze::{
+    cairo::CairoFiles, circular_builder, generator::Generator, hexagonal_builder,
+    randomness::Randomness, rectangular_builder, svg_painter::paint_shapes, triangular_builder,
+};
+use std::{fs::File, io::Write, str::FromStr};
 
 fn main() {
     let mut randomness=Randomness::new(
@@ -10,18 +12,21 @@ fn main() {
         ).unwrap(),
         BigUint::from(10u32).pow(100));
 
-  //  let builder = rectangular_builder::Builder::new(3, 3);
-  //let builder = triangular_builder::Builder::new(5);
-  //let builder = hexagonal_builder::Builder::new(5);
-  let mut builder = circular_builder::Builder::new(4);  
-  let (graph, shapes) = builder.build();
+    let builder = rectangular_builder::Builder::new(20, 15);
+    //let builder = triangular_builder::Builder::new(12);
+    //let builder = hexagonal_builder::Builder::new(5);
+    //let mut builder = circular_builder::Builder::new(6);
+    let (graph, shapes) = builder.build();
     let mut generator = Generator::new();
     let instance = generator.generate(&graph, &mut randomness);
-    
+
     // paint as svg
-    File::create("maze.svg").unwrap().write(paint_shapes(&shapes, &instance).as_bytes()).unwrap();
-    
-    
+    let with_solution = true;
+    File::create("maze.svg")
+        .unwrap()
+        .write(paint_shapes(with_solution, &shapes, &instance).as_bytes())
+        .unwrap();
+
     // save graph, instance, solution for cairo
     let cairo = CairoFiles::new(&graph);
     cairo.create_structure_file("maze.mas", &graph);

@@ -15,7 +15,7 @@ impl  Builder {
 
         let mut graph = Graph::new();
        
-        let rsp = 10;
+        let rsp = 100;
         let mut shapes = Shapes::new(false, rsp*self.height, rsp*self.width, rsp);
        
        

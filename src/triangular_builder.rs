@@ -1,8 +1,8 @@
 use crate::graph::Graph;
 use crate::shapes::Shapes;
 
-const rsx: i32 = 12;
-const rsy: i32 = 20;
+const rsx: i32 = 120;
+const rsy: i32 = 200;
 
 pub struct Builder {
     size: i32,
@@ -127,8 +127,9 @@ impl RowBuilder {
                 //LOGGER.log(Level.FINE, "addRoom " + r + " y=" + y + " j=" + j + " prevRoom=" + prevRoom +
                 //      " myFirst=" + myFirst + " prevFirst=" + prevFirst + " lastRoom=" + lastRoom);
 
+                shapes.add_floor(r, rsx * x2, rsy * self.y + rsy / 2);
                 /*
-                                  final Point2DInt position = new Point2DInt(rsx * x2, rsy * y + rsy / 2);
+                                  final Point2DInt position = new Point2DInt(r);
                                   //final MarkShape mark = new MarkShape(r, position);
                                   shapes.add (mark);
                                   final FloorShape floor = new FloorShape(r, position);
