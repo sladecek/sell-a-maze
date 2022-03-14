@@ -18,7 +18,8 @@ fn main() {
     //let mut builder = circular_builder::Builder::new(6);
     let (graph, shapes) = builder.build();
     let mut generator = Generator::new();
-    let instance = generator.generate(&graph, &mut randomness);
+    let is_solvable = false;
+    let instance = generator.generate(&graph, &mut randomness, is_solvable );
 
     // paint as svg
     let with_solution = true;

@@ -32,11 +32,3 @@ impl Instance {
         self.is_wall_closed.set(wall as usize, value);
     }
 }
-
-/*
-
-    public String printClosedWalls() {
-        return new BitSetIntervalPrinter(_is_wall_closed, wall_count).printAsIntervals();
-    }
-
- */

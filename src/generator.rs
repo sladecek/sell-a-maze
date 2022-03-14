@@ -1,4 +1,4 @@
-use crate::graph::Graph;
+use crate::graph::{Graph, self};
 use crate::instance::Instance;
 use crate::randomness::Randomness;
 use log::debug;
@@ -20,7 +20,12 @@ impl Generator {
         }
     }
 
-    pub fn generate(&mut self, graph: &Graph, randomness: &mut Randomness) -> Instance {
+    pub fn generate(
+        &mut self,
+        graph: &Graph,
+        randomness: &mut Randomness,
+        is_solvable: bool,
+    ) -> Instance {
         let mut result = Instance::new(graph.wall_count(), graph.start_room, graph.target_room);
 
         let all_rooms_cnt = graph.room_count() as usize;
@@ -61,6 +66,9 @@ impl Generator {
             self.visit_room(graph.get_room_behind_wall(*room, wall));
         }
 
+        if !is_solvable {
+            self.destroy_solution(&mut result, &graph);
+        }
         result
     }
 
@@ -85,5 +93,18 @@ impl Generator {
         debug!("visiting room {}", room);
         self.visited_rooms.set(room as usize, true);
         self.stack.push(room);
+    }
+
+    fn destroy_solution(&self, result: &mut Instance, graph: &Graph) {
+        let half = result.solution.len() / 2;
+        if half+1 >= result.solution.len()
+        {
+            return
+        }         
+        let room1 = result.solution[half];
+        let room2 = result.solution[half+1];
+        let wall = graph.get_wall_between_rooms(room1, room2);
+        result.set_wall_closed(wall, true);
+        
     }
 }
