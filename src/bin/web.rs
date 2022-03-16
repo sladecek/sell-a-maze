@@ -23,7 +23,7 @@ async fn main() -> std::io::Result<()> {
             .wrap(Logger::default())
             .wrap(Logger::new("%a %{User-Agent}i"))
             .service(
-                fs::Files::new("/", "static")
+                fs::Files::new("/static", "static")
                     .show_files_listing()
                     .use_last_modified(true),
             )
