@@ -41,7 +41,7 @@ async fn main() -> std::io::Result<()> {
             // .service(handler::users_post)
             .service(handler::version_get)
     })
-    .bind("127.0.0.1:2705")?
+    .bind("0.0.0.0:2705")?
     .run()
     .await
 }
