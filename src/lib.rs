@@ -10,3 +10,7 @@ pub mod shapes;
 pub mod svg_painter;
 pub mod triangular_builder;
 pub mod hexagonal_builder;
+
+pub mod queue;
+pub mod storage;
+pub mod maker;

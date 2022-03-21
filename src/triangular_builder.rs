@@ -1,8 +1,8 @@
 use crate::graph::Graph;
 use crate::shapes::Shapes;
 
-const rsx: i32 = 120;
-const rsy: i32 = 200;
+const RSX: i32 = 120;
+const RSY: i32 = 200;
 
 pub struct Builder {
     size: i32,
@@ -19,115 +19,115 @@ impl Builder {
         let height = self.size;
         let width = 2 * self.size;
 
-        let mut shapes = Shapes::new(false, rsy * height, rsx * width, rsx);
+        let mut shapes = Shapes::new(false, RSY * height, RSX * width, RSX);
 
-        let mut prevFirst = -1;
-        let mut lastRoom = -1;
-        let mut myFirst = -1;
+        let mut prev_first = -1;
+        let mut last_room = -1;
+        let mut my_first = -1;
 
         // for all rows
         for y in 0..self.size + 1 {
-            let roomsInRow = 2 * y + 1;
+            let rooms_in_row = 2 * y + 1;
             if y < self.size {
-                let prevRoom = -1;
-                let mut rowBuilder = RowBuilder {
+                let prev_room = -1;
+                let mut row_builder = RowBuilder {
                     size: self.size,
-                    prevFirst,
-                    lastRoom,
-                    myFirst,
+                    prev_first,
+                    last_room,
+                    my_first,
                     y,
-                    roomsInRow,
-                    prevRoom,
+                    rooms_in_row,
+                    prev_room,
                 };
-                rowBuilder.invoke(&mut graph, &mut shapes);
-                myFirst = rowBuilder.myFirst;
-                prevFirst = rowBuilder.prevFirst;
-                lastRoom = rowBuilder.lastRoom;
+                row_builder.invoke(&mut graph, &mut shapes);
+                my_first = row_builder.my_first;
+                prev_first = row_builder.prev_first;
+                last_room = row_builder.last_room;
             } else {
-                prevFirst = myFirst;
+                prev_first = my_first;
             }
             // connect rooms to upper row by horizontal walls
-            if prevFirst >= 0 {
+            if prev_first >= 0 {
                 let mut i = 0;
-                for j in (1..roomsInRow).step_by(2) {
+                for j in (1..rooms_in_row).step_by(2) {
                     let x = self.size + j - y - 1;
                     let mut r = -1;
                     if y < self.size {
-                        r = myFirst + j;
+                        r = my_first + j;
                     }
-                    addWallAndWallShape(&mut graph, &mut shapes, r, prevFirst + i, x, x + 2, y, y);
+                    add_wall_and_wall_shape(&mut graph, &mut shapes, r, prev_first + i, x, x + 2, y, y);
                     i += 2;
                 }
             }
         }
 
         graph.start_room = 0;
-        graph.target_room = lastRoom;
+        graph.target_room = last_room;
         (graph, shapes)
     }
 }
 
-fn addWallAndWallShape(
+fn add_wall_and_wall_shape(
     graph: &mut Graph,
     shapes: &mut Shapes,
-    roomLeft: i32,
-    roomRight: i32,
+    room_left: i32,
+    room_right: i32,
     x1: i32,
     x2: i32,
     y1: i32,
     y2: i32,
 ) {
-    let (p1x, p1y) = (rsx * x1, rsy * y1);
-    let (p2x, p2y) = (rsx * x2, rsy * y2);
+    let (p1x, p1y) = (RSX * x1, RSY * y1);
+    let (p2x, p2y) = (RSX * x2, RSY * y2);
     //LOGGER.log(Level.FINE, "addWallAndWallShape roomRight=" + roomRight + " roomLeft=" +
     //roomLeft + " y1=" + y1 + " y2=" + y2 + " x1=" + x1 + " x2=" + x2);
 
-    if roomRight >= 0 && roomLeft >= 0 {
-        let id = graph.add_wall(roomRight, roomLeft);
+    if room_right >= 0 && room_left >= 0 {
+        let id = graph.add_wall(room_right, room_left);
 
-        shapes.add_inner_wall(id, p1x, p1y, p2x, p2y, roomRight, roomLeft);
+        shapes.add_inner_wall(id, p1x, p1y, p2x, p2y, room_right, room_left);
     } else {
-        shapes.add_outer_wall(p1x, p1y, p2x, p2y, roomRight, roomLeft);
+        shapes.add_outer_wall(p1x, p1y, p2x, p2y, room_right, room_left);
     }
 }
 struct RowBuilder {
     pub size: i32,
     pub y: i32,
-    pub roomsInRow: i32,
-    pub prevFirst: i32,
-    pub lastRoom: i32,
-    pub myFirst: i32,
-    pub prevRoom: i32,
+    pub rooms_in_row: i32,
+    pub prev_first: i32,
+    pub last_room: i32,
+    pub my_first: i32,
+    pub prev_room: i32,
 }
 
 impl RowBuilder {
     fn invoke(&mut self, graph: &mut Graph, shapes: &mut Shapes) {
         // make a row of rooms  and vertical walls among them
-        for j in 0..self.roomsInRow + 1 {
+        for j in 0..self.rooms_in_row + 1 {
             let x1 = self.size + j - self.y - 1;
             let x2 = self.size + j - self.y;
             let mut y1 = self.y;
             let mut y2 = self.y;
-            let mut newRoomIsRight = true;
+            let mut new_room_is_right = true;
             if j % 2 == 0 {
                 y1 += 1;
             } else {
                 y2 += 1;
-                newRoomIsRight = false;
+                new_room_is_right = false;
             }
 
             let mut r = -1;
-            if j < self.roomsInRow {
+            if j < self.rooms_in_row {
                 r = graph.add_room();
                 if j == 0 {
-                    self.prevFirst = self.myFirst;
-                    self.myFirst = r;
+                    self.prev_first = self.my_first;
+                    self.my_first = r;
                 }
-                self.lastRoom = r;
+                self.last_room = r;
                 //LOGGER.log(Level.FINE, "addRoom " + r + " y=" + y + " j=" + j + " prevRoom=" + prevRoom +
                 //      " myFirst=" + myFirst + " prevFirst=" + prevFirst + " lastRoom=" + lastRoom);
 
-                shapes.add_floor(r, rsx * x2, rsy * self.y + rsy / 2);
+                shapes.add_floor(r, RSX * x2, RSY * self.y + RSY / 2);
                 /*
                                   final Point2DInt position = new Point2DInt(r);
                                   //final MarkShape mark = new MarkShape(r, position);
@@ -137,12 +137,12 @@ impl RowBuilder {
                 */
             }
 
-            if newRoomIsRight {
-                addWallAndWallShape(graph,  shapes, r, self.prevRoom, x1, x2, y1, y2);
+            if new_room_is_right {
+                add_wall_and_wall_shape(graph,  shapes, r, self.prev_room, x1, x2, y1, y2);
             } else {
-                addWallAndWallShape(graph,  shapes, self.prevRoom, r, x1, x2, y1, y2);
+                add_wall_and_wall_shape(graph,  shapes, self.prev_room, r, x1, x2, y1, y2);
             }
-            self.prevRoom = r;
+            self.prev_room = r;
         }
     }
 }

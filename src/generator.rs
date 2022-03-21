@@ -1,4 +1,4 @@
-use crate::graph::{Graph, self};
+use crate::graph::{Graph};
 use crate::instance::Instance;
 use crate::randomness::Randomness;
 use log::debug;
@@ -35,9 +35,9 @@ impl Generator {
         self.stack = vec![];
         self.visit_room(graph.start_room);
         while !self.stack.is_empty() {
-            let room = self.stack.last().unwrap();
+            let room = *self.stack.last().unwrap();
             debug!(" observing room: {}", room);
-            if *room == graph.target_room {
+            if room == graph.target_room {
                 // save solution
                 assert!(result.solution.is_empty(), "Maze cannot have two solutions");
                 result.solution = self.stack.clone();
@@ -48,7 +48,7 @@ impl Generator {
                 continue;
             }
 
-            let candidates = self.find_all_possible_next_rooms(graph, &result, *room);
+            let candidates = self.find_all_possible_next_rooms(graph, &result, room);
             if candidates.is_empty() {
                 // backtrace - no way to go
                 debug!("backtrace ");
@@ -63,7 +63,7 @@ impl Generator {
             let wall = candidates[choice as usize];
             debug!(" opening wall {}", wall);
             result.set_wall_closed(wall, false);
-            self.visit_room(graph.get_room_behind_wall(*room, wall));
+            self.visit_room(graph.get_room_behind_wall(room, wall));
         }
 
         if !is_solvable {

@@ -1,0 +1,1 @@
+curl -d '{"type":"circular", "size":"huge", "payment":"xxx", "guaranteed":true}' -H "Content-Type: application/json" -X POST http://localhost:2705/api/maze

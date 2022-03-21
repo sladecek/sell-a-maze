@@ -1,7 +1,6 @@
 use num_bigint::BigUint;
 use sell_a_maze::{
-    cairo::CairoFiles, circular_builder, generator::Generator, hexagonal_builder,
-    randomness::Randomness, rectangular_builder, svg_painter::paint_shapes, triangular_builder,
+    randomness::Randomness, rectangular_builder, svg_painter::paint_shapes, generator::Generator, cairo::CairoFiles
 };
 use std::{fs::File, io::Write, str::FromStr};
 
@@ -30,7 +29,7 @@ fn main() {
 
     // save graph, instance, solution for cairo
     let cairo = CairoFiles::new(&graph);
-    cairo.create_structure_file("maze.mas", &graph);
-    cairo.create_instance_file("maze.mai", &graph, &instance);
-    cairo.create_path_file("maze.map", &graph, &instance);
+    cairo.create_structure_file("maze.mas", &graph).expect("cannot write structure file");
+    cairo.create_instance_file("maze.mai", &graph, &instance).expect("cannot write instance file");
+    cairo.create_path_file("maze.map", &graph, &instance).expect("cannot write path file");
 }

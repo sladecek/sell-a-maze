@@ -1,0 +1,154 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3200 2270">
+    <line xmlns="http://www.w3.org/2000/svg" x1="500" y1="200" x2="300" y2="200" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="300" y1="200" x2="200" y2="370" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="200" y1="370" x2="300" y2="540" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="600" y1="370" x2="500" y2="200" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="500" y1="540" x2="300" y2="540" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="300" y1="540" x2="200" y2="710" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="200" y1="710" x2="300" y2="880" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="300" y1="880" x2="200" y2="1050" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="200" y1="1050" x2="300" y2="1220" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="300" y1="1220" x2="200" y2="1390" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="200" y1="1390" x2="300" y2="1560" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="500" y1="1560" x2="300" y2="1560" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="300" y1="1560" x2="200" y2="1730" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="200" y1="1730" x2="300" y2="1900" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="300" y1="1900" x2="500" y2="1900" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="800" y1="370" x2="600" y2="370" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="500" y1="540" x2="600" y2="710" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="800" y1="710" x2="600" y2="710" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="500" y1="880" x2="600" y2="1050" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="800" y1="1050" x2="600" y2="1050" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="600" y1="1050" x2="500" y2="1220" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="500" y1="1220" x2="600" y2="1390" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="800" y1="1390" x2="600" y2="1390" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="800" y1="1730" x2="600" y2="1730" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="500" y1="1900" x2="600" y2="2070" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="600" y1="2070" x2="800" y2="2070" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="800" y1="2070" x2="900" y2="1900" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="1100" y1="200" x2="900" y2="200" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="900" y1="200" x2="800" y2="370" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="1200" y1="370" x2="1100" y2="200" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="900" y1="540" x2="800" y2="710" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="800" y1="710" x2="900" y2="880" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="1100" y1="880" x2="900" y2="880" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="800" y1="1050" x2="900" y2="1220" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="1100" y1="1220" x2="900" y2="1220" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="800" y1="1390" x2="900" y2="1560" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="1100" y1="1560" x2="900" y2="1560" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="900" y1="1560" x2="800" y2="1730" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="900" y1="1900" x2="1100" y2="1900" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="1400" y1="370" x2="1200" y2="370" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="1200" y1="370" x2="1100" y2="540" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="1400" y1="710" x2="1200" y2="710" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="1200" y1="710" x2="1100" y2="880" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="1400" y1="1050" x2="1200" y2="1050" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="1200" y1="1050" x2="1100" y2="1220" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="1400" y1="1390" x2="1200" y2="1390" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="1200" y1="1390" x2="1100" y2="1560" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="1400" y1="1730" x2="1200" y2="1730" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="1200" y1="1730" x2="1100" y2="1900" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="1100" y1="1900" x2="1200" y2="2070" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="1200" y1="2070" x2="1400" y2="2070" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="1400" y1="2070" x2="1500" y2="1900" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="1700" y1="200" x2="1500" y2="200" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="1500" y1="200" x2="1400" y2="370" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="1800" y1="370" x2="1700" y2="200" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="1500" y1="540" x2="1400" y2="710" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="1400" y1="710" x2="1500" y2="880" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="1400" y1="1050" x2="1500" y2="1220" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="1700" y1="1220" x2="1500" y2="1220" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="1400" y1="1390" x2="1500" y2="1560" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="1500" y1="1900" x2="1700" y2="1900" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="2000" y1="370" x2="1800" y2="370" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="1800" y1="370" x2="1700" y2="540" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="1700" y1="540" x2="1800" y2="710" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="2000" y1="710" x2="1800" y2="710" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="1800" y1="710" x2="1700" y2="880" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="1700" y1="880" x2="1800" y2="1050" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="1800" y1="1050" x2="1700" y2="1220" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="1700" y1="1220" x2="1800" y2="1390" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="2000" y1="1390" x2="1800" y2="1390" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="1700" y1="1560" x2="1800" y2="1730" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="2000" y1="1730" x2="1800" y2="1730" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="1800" y1="1730" x2="1700" y2="1900" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="1700" y1="1900" x2="1800" y2="2070" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="1800" y1="2070" x2="2000" y2="2070" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="2000" y1="2070" x2="2100" y2="1900" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="2300" y1="200" x2="2100" y2="200" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="2100" y1="200" x2="2000" y2="370" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="2400" y1="370" x2="2300" y2="200" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="2300" y1="540" x2="2100" y2="540" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="2300" y1="880" x2="2100" y2="880" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="2100" y1="880" x2="2000" y2="1050" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="2100" y1="1220" x2="2000" y2="1390" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="2300" y1="1560" x2="2100" y2="1560" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="2100" y1="1560" x2="2000" y2="1730" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="2100" y1="1900" x2="2300" y2="1900" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="2600" y1="370" x2="2400" y2="370" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="2300" y1="540" x2="2400" y2="710" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="2600" y1="710" x2="2400" y2="710" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="2400" y1="710" x2="2300" y2="880" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="2300" y1="880" x2="2400" y2="1050" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="2400" y1="1050" x2="2300" y2="1220" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="2300" y1="1220" x2="2400" y2="1390" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="2400" y1="1390" x2="2300" y2="1560" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="2300" y1="1560" x2="2400" y2="1730" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="2300" y1="1900" x2="2400" y2="2070" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="2400" y1="2070" x2="2600" y2="2070" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="2600" y1="2070" x2="2700" y2="1900" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="2900" y1="200" x2="2700" y2="200" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="2700" y1="200" x2="2600" y2="370" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="2600" y1="370" x2="2700" y2="540" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="2900" y1="540" x2="3000" y2="370" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="3000" y1="370" x2="2900" y2="200" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="2600" y1="710" x2="2700" y2="880" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="2900" y1="880" x2="3000" y2="710" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="3000" y1="710" x2="2900" y2="540" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="2700" y1="880" x2="2600" y2="1050" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="2600" y1="1050" x2="2700" y2="1220" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="2900" y1="1220" x2="3000" y2="1050" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="3000" y1="1050" x2="2900" y2="880" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="2700" y1="1220" x2="2600" y2="1390" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="2900" y1="1560" x2="3000" y2="1390" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="3000" y1="1390" x2="2900" y2="1220" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="2700" y1="1560" x2="2600" y2="1730" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="2600" y1="1730" x2="2700" y2="1900" style="stroke:black;stroke-width:1"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="2700" y1="1900" x2="2900" y2="1900" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="2900" y1="1900" x2="3000" y2="1730" style="stroke:black;stroke-width:3"/>
+    <line xmlns="http://www.w3.org/2000/svg" x1="3000" y1="1730" x2="2900" y2="1560" style="stroke:black;stroke-width:3"/>
+    <circle xmlns="http://www.w3.org/2000/svg" cx="400" cy="370" r="16" fill="rgb(255,0,0)"/>
+    <circle xmlns="http://www.w3.org/2000/svg" cx="400" cy="710" r="6" fill="rgb(120,120,120)"/>
+    <circle xmlns="http://www.w3.org/2000/svg" cx="400" cy="1050" r="6" fill="rgb(120,120,120)"/>
+    <circle xmlns="http://www.w3.org/2000/svg" cx="400" cy="1390" r="6" fill="rgb(120,120,120)"/>
+    <circle xmlns="http://www.w3.org/2000/svg" cx="400" cy="1730" r="6" fill="rgb(120,120,120)"/>
+    <circle xmlns="http://www.w3.org/2000/svg" cx="700" cy="540" r="6" fill="rgb(120,120,120)"/>
+    <circle xmlns="http://www.w3.org/2000/svg" cx="700" cy="880" r="6" fill="rgb(120,120,120)"/>
+    <circle xmlns="http://www.w3.org/2000/svg" cx="700" cy="1560" r="6" fill="rgb(120,120,120)"/>
+    <circle xmlns="http://www.w3.org/2000/svg" cx="700" cy="1900" r="6" fill="rgb(120,120,120)"/>
+    <circle xmlns="http://www.w3.org/2000/svg" cx="1000" cy="370" r="6" fill="rgb(120,120,120)"/>
+    <circle xmlns="http://www.w3.org/2000/svg" cx="1000" cy="710" r="6" fill="rgb(120,120,120)"/>
+    <circle xmlns="http://www.w3.org/2000/svg" cx="1000" cy="1050" r="6" fill="rgb(120,120,120)"/>
+    <circle xmlns="http://www.w3.org/2000/svg" cx="1000" cy="1730" r="6" fill="rgb(120,120,120)"/>
+    <circle xmlns="http://www.w3.org/2000/svg" cx="1300" cy="540" r="6" fill="rgb(120,120,120)"/>
+    <circle xmlns="http://www.w3.org/2000/svg" cx="1300" cy="880" r="6" fill="rgb(120,120,120)"/>
+    <circle xmlns="http://www.w3.org/2000/svg" cx="1300" cy="1560" r="6" fill="rgb(120,120,120)"/>
+    <circle xmlns="http://www.w3.org/2000/svg" cx="1600" cy="370" r="6" fill="rgb(120,120,120)"/>
+    <circle xmlns="http://www.w3.org/2000/svg" cx="1600" cy="710" r="6" fill="rgb(120,120,120)"/>
+    <circle xmlns="http://www.w3.org/2000/svg" cx="1600" cy="1050" r="6" fill="rgb(120,120,120)"/>
+    <circle xmlns="http://www.w3.org/2000/svg" cx="1600" cy="1390" r="6" fill="rgb(120,120,120)"/>
+    <circle xmlns="http://www.w3.org/2000/svg" cx="1600" cy="1730" r="6" fill="rgb(120,120,120)"/>
+    <circle xmlns="http://www.w3.org/2000/svg" cx="1900" cy="540" r="6" fill="rgb(120,120,120)"/>
+    <circle xmlns="http://www.w3.org/2000/svg" cx="1900" cy="880" r="6" fill="rgb(120,120,120)"/>
+    <circle xmlns="http://www.w3.org/2000/svg" cx="1900" cy="1220" r="6" fill="rgb(120,120,120)"/>
+    <circle xmlns="http://www.w3.org/2000/svg" cx="1900" cy="1560" r="6" fill="rgb(120,120,120)"/>
+    <circle xmlns="http://www.w3.org/2000/svg" cx="2200" cy="370" r="6" fill="rgb(120,120,120)"/>
+    <circle xmlns="http://www.w3.org/2000/svg" cx="2200" cy="710" r="6" fill="rgb(120,120,120)"/>
+    <circle xmlns="http://www.w3.org/2000/svg" cx="2200" cy="1050" r="6" fill="rgb(120,120,120)"/>
+    <circle xmlns="http://www.w3.org/2000/svg" cx="2200" cy="1390" r="6" fill="rgb(120,120,120)"/>
+    <circle xmlns="http://www.w3.org/2000/svg" cx="2500" cy="540" r="6" fill="rgb(120,120,120)"/>
+    <circle xmlns="http://www.w3.org/2000/svg" cx="2800" cy="710" r="6" fill="rgb(120,120,120)"/>
+    <circle xmlns="http://www.w3.org/2000/svg" cx="2800" cy="1050" r="6" fill="rgb(120,120,120)"/>
+    <circle xmlns="http://www.w3.org/2000/svg" cx="2800" cy="1390" r="6" fill="rgb(120,120,120)"/>
+    <circle xmlns="http://www.w3.org/2000/svg" cx="2800" cy="1730" r="16" fill="rgb(0,255,0)"/>
+</svg>
