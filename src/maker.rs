@@ -1,0 +1,7 @@
+trait MazeMaker {
+
+}
+
+trait MazeProver {
+    
+}

@@ -1,7 +1,8 @@
 
 use actix_web::{
-    self,  post, web, HttpRequest, HttpResponse, get,
+    self, post, web, HttpRequest, HttpResponse, get,
 };
+use crate::job::Job;
 //use log::info;
 use crate::queue::JobQueue;
 use crate::storage::{GoogleJobStorage};
@@ -10,7 +11,7 @@ use crate::storage::{GoogleJobStorage};
 pub async fn maze_post(
     _queue: web::Data<JobQueue>,
     _storage: web::Data<GoogleJobStorage>,
-    _req: HttpRequest,
+    _info: web::Json<Job>
 ) -> HttpResponse {
     HttpResponse::Ok().finish()
 }
