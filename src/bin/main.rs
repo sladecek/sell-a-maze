@@ -1,12 +1,9 @@
-use num_bigint::BigUint;
 use sell_a_maze::{
     job::{Job, MazeType, Size, State},
     maker::MazeMaker,
 };
-use std::str::FromStr;
 
 fn main() {
-  
 
     MazeMaker::make(
         &Job {

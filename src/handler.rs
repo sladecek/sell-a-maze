@@ -1,4 +1,5 @@
-use actix_web::{self, get, post, web, HttpRequest, HttpResponse};
+use std::str::FromStr;
+use actix_web::{self, get, post, web, HttpResponse};
 use uuid::Uuid;
 
 use crate::job::{Job, State};
@@ -6,30 +7,42 @@ use crate::queue::Queue;
 use crate::storage::GoogleJobStorage;
 
 #[post("/api/maze")]
-pub async fn maze_post(
-    queue: web::Data<Queue>,
-    storage: web::Data<GoogleJobStorage>,
-    job: web::Json<Job>,
-) -> HttpResponse {
+pub async fn maze_post(queue: web::Data<Queue>, job: web::Json<Job>) -> HttpResponse {
     let id = Uuid::new_v4();
     let mut j: Job = (*job).clone();
-    j.state = if j.guaranteed { State::WaitingForPayment } else { State::InProgress }; 
-    
+    j.state = if j.guaranteed {
+        State::WaitingForPayment
+    } else {
+        State::InProgress
+    };
+
     log::info!("Maze request id={} {:?}", id, job);
-    let sr = storage.save_async(id, &job).await;
+    let sr = GoogleJobStorage::save_async(id, &job).await;
     if sr.is_ok() {
         queue.uids.lock().unwrap().push_back(id);
-        HttpResponse::Ok()
+        HttpResponse::Ok().json(id.to_string())
     } else {
         log::error!("Cannot save job id={} {}", id, sr.unwrap_err());
-        HttpResponse::InternalServerError()
+        HttpResponse::InternalServerError().finish()
     }
-    .finish()
 }
 
 #[get("/api/maze/{id}")]
-pub async fn maze_get(_storage: web::Data<GoogleJobStorage>, _req: HttpRequest) -> HttpResponse {
-    HttpResponse::Ok().finish()
+pub async fn maze_get(path: web::Path<String>) -> HttpResponse {
+    let id_str = path.into_inner();
+    let id = Uuid::from_str(&id_str);
+    if id.is_err() {
+        HttpResponse::BadRequest().finish()
+    } else {
+        let uuid = id.unwrap();
+        let job_res = GoogleJobStorage::load_async(uuid).await;
+        if job_res.is_err() {
+            log::error!("Cannot load {} from cloud storage", uuid);
+            HttpResponse::InternalServerError().finish()
+        } else {
+            HttpResponse::Ok().json(job_res.unwrap())
+        }
+    }
 }
 
 #[get("/api/version")]

@@ -15,11 +15,10 @@ fn process_job(job: &mut Job) -> bool {
     if job.state == State::InProgress {
         MazeMaker::make(job,"work/");
         job.state = State::Done;
+        return true
     }
     false
-
 }
-
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
@@ -28,22 +27,19 @@ async fn main() -> std::io::Result<()> {
     std::env::set_var("RUST_LOG", "debug");
     env_logger::init();
 
-    let web_storage = Data::new(GoogleJobStorage::new());
-
     // Worker thread makes mazes one by 
     let queue = Queue {uids: Mutex::new(VecDeque::new())};
     let queue_data = Data::new(queue);
 
     let sd2 = queue_data.clone();
     let _worker_thread = spawn(move || {
-        let worker_storage = GoogleJobStorage::new();
-
+       
         loop {
             
             let item = sd2.uids.lock().unwrap().pop_front();
             if item.is_some() {
                 let id = item.unwrap();
-                let job_res = worker_storage.load(id);
+                let job_res = GoogleJobStorage::load(id);
                 if job_res.is_err() {
                     log::error!("Cannot load job {} from storage", id);
                     continue;
@@ -51,7 +47,7 @@ async fn main() -> std::io::Result<()> {
                 let mut job = job_res.unwrap();
                 let changed = process_job(&mut job);
                 if changed {
-                    if worker_storage.save(id, &job).is_err() {
+                    if GoogleJobStorage::save(id, &job).is_err() {
                         log::error!("Cannot save job {} to storage", id);
                         continue;             
                     }
@@ -71,7 +67,6 @@ async fn main() -> std::io::Result<()> {
             .wrap(Logger::default())
             .wrap(Logger::new("%a %{User-Agent}i"))
             .app_data(Data::clone(&queue_data))
-            .app_data(Data::clone(&web_storage))
             .service(handler::maze_post)
             .service(handler::maze_get)
             .service(handler::version_get)
