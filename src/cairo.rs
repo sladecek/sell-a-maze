@@ -19,7 +19,7 @@ impl CairoFiles {
         CairoFiles { room_primes }
     }
 
-    pub fn create_structure_file(&self, name: &str, graph: &Graph)-> io::Result<()> {
+    pub fn create_structure_file(&self, name: String, graph: &Graph)-> io::Result<()> {
         let f = File::create(name)?;
         writeln!(&f, "{}", graph.room_count())?;
         writeln!(&f, "{}", graph.wall_count())?;
@@ -34,7 +34,7 @@ impl CairoFiles {
         Ok(())
     }
 
-    pub fn create_instance_file(&self, name: &str, graph: &Graph, instance: &Instance)-> io::Result<()> {
+    pub fn create_instance_file(&self, name: String, graph: &Graph, instance: &Instance)-> io::Result<()> {
         let f = File::create(name)?;
         for w in 0..graph.wall_count() {
             writeln!(&f, "{}", if instance.is_wall_closed(w) {1} else {0})?;    
@@ -42,7 +42,7 @@ impl CairoFiles {
         Ok(())
     }
 
-    pub fn create_path_file(&self, name: &str, graph: &Graph, instance: &Instance) -> io::Result<()> {
+    pub fn create_path_file(&self, name: String, graph: &Graph, instance: &Instance) -> io::Result<()> {
         let f = File::create(name)?;
         writeln!(&f, "{}", instance.solution.len())?;
         for i in 0..instance.solution.len() {

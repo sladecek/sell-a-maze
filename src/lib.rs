@@ -1,3 +1,4 @@
+
 pub mod cairo;
 pub mod circular_builder;
 pub mod generator;
@@ -8,7 +9,6 @@ pub mod instance;
 pub mod job;
 pub mod maker;
 pub mod queue;
-pub mod randomness;
 pub mod rectangular_builder;
 pub mod shapes;
 pub mod storage;

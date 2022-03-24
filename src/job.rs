@@ -1,41 +1,49 @@
-use std::default;
-
+use serde::Serialize;
 use serde_derive::Deserialize;
 
-
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Clone, Copy, Deserialize, Serialize, PartialEq, Eq)]
 #[warn(non_camel_case_types)]
-enum State {
-    new, done, error
+pub enum State {
+    WaitingForPayment,
+    InProgress,
+    Done,
+    Error,
 }
 
 impl Default for State {
     fn default() -> Self {
-        State::new
+        State::WaitingForPayment
     }
 }
-#[derive(Debug, Deserialize)]
-enum Size {
-    small, medium, large, huge
+#[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq, Eq)]
+pub enum Size {
+    Small,
+    Medium,
+    Large,
+    Huge,
 }
 
-#[derive(Debug, Deserialize)]
-enum MazeType {
-    rectangular, circular, triangular, hexagonal
+#[derive(Debug, Clone, Copy, Serialize, Deserialize)]
+pub enum MazeType {
+    Rectangular,
+    Circular,
+    Triangular,
+    Hexagonal,
 }
 
-#[derive(Debug, Deserialize)]
-pub struct Job
-{
+#[derive(Clone, Debug, Deserialize, Serialize)]
+pub struct Job {
     #[serde(default)]
-    state: State,
-    size: Size,
-    #[serde(rename="type")]
-    maze_type: MazeType,
-    guaranteed: bool,
-    payment: String 
+    pub state: State,
+    pub size: Size,
+    #[serde(rename = "type")]
+    pub maze_type: MazeType,
+    pub guaranteed: bool,
+    pub payment: String,
 }
 
 impl Job {
-
+    pub fn is_in_progress(&self) -> bool {
+        self.state == State::InProgress || self.state == State::WaitingForPayment
+    }
 }

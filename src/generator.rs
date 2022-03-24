@@ -1,12 +1,11 @@
 use crate::graph::{Graph};
 use crate::instance::Instance;
-use crate::randomness::Randomness;
+use rand::Rng;
 use log::debug;
 
 use fixedbitset::FixedBitSet;
 
 pub struct Generator {
-    //private final Random randomGenerator;
     visited_rooms: FixedBitSet,
     stack: Vec<i32>,
 }
@@ -23,9 +22,9 @@ impl Generator {
     pub fn generate(
         &mut self,
         graph: &Graph,
-        randomness: &mut Randomness,
         is_solvable: bool,
     ) -> Instance {
+        let mut rng = rand::thread_rng();
         let mut result = Instance::new(graph.wall_count(), graph.start_room, graph.target_room);
 
         let all_rooms_cnt = graph.room_count() as usize;
@@ -58,7 +57,7 @@ impl Generator {
             // select next room
             let mut choice = 0;
             if candidates.len() > 1 {
-                choice = randomness.get(candidates.len() as u32);
+                choice = rng.gen_range(0..candidates.len() as u32);
             }
             let wall = candidates[choice as usize];
             debug!(" opening wall {}", wall);
