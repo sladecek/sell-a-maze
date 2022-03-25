@@ -28,6 +28,9 @@ async function setPhase(ph) {
 		Spinner.show();
 		await callPost();
 	}
+	if (ph == "done") {
+		document.getElementById("guarantee-warning").style.display = maze.guaranteed ? "none" : "block";
+	}
 }
 
 async function callPost() {
