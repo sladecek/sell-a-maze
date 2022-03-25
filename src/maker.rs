@@ -1,4 +1,5 @@
 use std::{fs::File, io::Write, process::Command};
+use rand::Rng;
 
 use crate::{
     cairo::CairoFiles,
@@ -54,7 +55,12 @@ impl MazeMaker {
             }
         };
         let mut generator = Generator::new();
-        let is_solvable = false;
+        let mut is_solvable = true;
+        if !job.guaranteed {
+            if rand::thread_rng().gen_range(1..7) <= 1 {
+                is_solvable = false;
+            } 
+        }
         let instance = generator.generate(&graph, is_solvable);
 
 

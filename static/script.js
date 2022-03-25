@@ -29,9 +29,14 @@ async function setPhase(ph) {
 		await callPost();
 	}
 	if (ph == "done") {
+		
 		document.getElementById("guarantee-warning").style.display = maze.guaranteed ? "none" : "block";
+		document.getElementById("proof").style.display = maze.guaranteed ? "block" : "none";
 		document.getElementById("svg-slot").setAttribute("src",'api/file/' + maze.svg);
-
+		document.getElementById("svg-link").setAttribute("href", 'api/file/' + maze.svg);
+		document.getElementById("pdf-link").setAttribute("href", 'api/file/' + maze.pdf);
+		document.getElementById("pdf-mas").setAttribute("href", 'api/file/' + maze_structure);
+		document.getElementById("pdf-mai").setAttribute("href", 'api/file/' + maze_instance);
 	}
 }
 
