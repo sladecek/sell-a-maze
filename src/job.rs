@@ -39,7 +39,16 @@ pub struct Job {
     #[serde(rename = "type")]
     pub maze_type: MazeType,
     pub guaranteed: bool,
+    #[serde(default)]
     pub payment: String,
+    #[serde(default)]
+    pub svg: String,
+    #[serde(default)]
+    pub pdf: String,
+    #[serde(default)]
+    pub maze_structure: String,
+    #[serde(default)]
+    pub maze_instance: String
 }
 
 impl Job {

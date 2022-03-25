@@ -4,7 +4,7 @@ use uuid::Uuid;
 
 use crate::job::{Job, State};
 use crate::queue::Queue;
-use crate::storage::GoogleJobStorage;
+use crate::storage::Storage;
 
 #[post("/api/maze")]
 pub async fn maze_post(queue: web::Data<Queue>, job: web::Json<Job>) -> HttpResponse {
@@ -17,7 +17,7 @@ pub async fn maze_post(queue: web::Data<Queue>, job: web::Json<Job>) -> HttpResp
     };
 
     log::info!("Maze request id={} {:?}", id, job);
-    let sr = GoogleJobStorage::save_async(id, &job).await;
+    let sr = Storage::save_job_async(id, &job).await;
     if sr.is_ok() {
         queue.uids.lock().unwrap().push_back(id);
         HttpResponse::Ok().json(id.to_string())
@@ -35,7 +35,7 @@ pub async fn maze_get(path: web::Path<String>) -> HttpResponse {
         HttpResponse::BadRequest().finish()
     } else {
         let uuid = id.unwrap();
-        let job_res = GoogleJobStorage::load_async(uuid).await;
+        let job_res = Storage::load_job_async(uuid).await;
         if job_res.is_err() {
             log::error!("Cannot load {} from cloud storage", uuid);
             HttpResponse::InternalServerError().finish()

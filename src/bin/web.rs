@@ -1,19 +1,21 @@
 use actix_files as fs;
 use actix_web::{self, middleware::Logger, web::Data, App, HttpServer};
 use env_logger;
-use sell_a_maze::{handler, job::{Job, State}, storage::GoogleJobStorage, queue::Queue, maker::MazeMaker};
+use sell_a_maze::{handler, job::{Job, State}, storage::Storage, queue::Queue, maker::MazeMaker};
+use uuid::Uuid;
 use std::{collections::VecDeque, sync::Mutex};
 use std::thread::spawn;
 use std::{thread, time};
 
-fn process_job(job: &mut Job) -> bool {
+fn process_job(id: &Uuid, job: &mut Job) -> bool {
     if job.state == State::WaitingForPayment {
         log::info!("Payment confirmed (demo mode)");
         job.state = State::InProgress;
         return true
     }
     if job.state == State::InProgress {
-        MazeMaker::make(job,"work/");
+        job.svg = format!("{}.svg", id.to_string());
+        MazeMaker::make(job);
         job.state = State::Done;
         return true
     }
@@ -39,15 +41,15 @@ async fn main() -> std::io::Result<()> {
             let item = sd2.uids.lock().unwrap().pop_front();
             if item.is_some() {
                 let id = item.unwrap();
-                let job_res = GoogleJobStorage::load(id);
+                let job_res = Storage::load_job(id);
                 if job_res.is_err() {
                     log::error!("Cannot load job {} from storage", id);
                     continue;
                 }
                 let mut job = job_res.unwrap();
-                let changed = process_job(&mut job);
+                let changed = process_job(&id, &mut job);
                 if changed {
-                    if GoogleJobStorage::save(id, &job).is_err() {
+                    if Storage::save_job(id, &job).is_err() {
                         log::error!("Cannot save job {} to storage", id);
                         continue;             
                     }

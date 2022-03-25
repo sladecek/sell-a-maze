@@ -12,8 +12,11 @@ fn main() {
             size: Size::Large,
             payment: String::from(""),
             guaranteed: false,
-        },
-        "",
+            svg: String::from("maze.svg"),
+            pdf: String::from("maze.pdf"),
+            maze_structure: String::from("maze.mas"),
+            maze_instance: String::from("maze.mai")
+        }
     );
     
 }

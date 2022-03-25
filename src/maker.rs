@@ -8,13 +8,13 @@ use crate::{
     job::{Job, MazeType, Size},
     rectangular_builder,
     svg_painter::paint_shapes,
-    triangular_builder,
+    triangular_builder, storage::Storage,
 };
 
 pub struct MazeMaker {}
 
 impl MazeMaker {
-    pub fn make(job: &Job, path_prefix: &str) {
+    pub fn make(job: &Job) {
         let (graph, shapes) = match job.maze_type {
             MazeType::Rectangular => {
                 let (w, h) = match job.size {
@@ -57,13 +57,15 @@ impl MazeMaker {
         let is_solvable = false;
         let instance = generator.generate(&graph, is_solvable);
 
-        // paint as svg
-        let with_solution = true;
-        File::create(format!("{}maze.svg", path_prefix))
-            .unwrap()
-            .write(paint_shapes(with_solution, &shapes, &instance).as_bytes())
-            .unwrap();
 
+        // paint as svg
+        let with_solution = false;
+                let svg = paint_shapes(with_solution, &shapes, &instance);
+
+        Storage::save_file(&job.svg, svg.as_bytes().to_vec(), "image/svg+xml" );
+
+ 
+/*
         // save graph, instance, solution for cairo
         let cairo = CairoFiles::new(&graph);
         cairo
@@ -83,5 +85,6 @@ impl MazeMaker {
                 .output()
                 .expect("failed to execute process")
         ;
-    }
+  */
+  }
 }
