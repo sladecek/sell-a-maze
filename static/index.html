@@ -2,121 +2,141 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <title>Buy a unique maze puzzle!</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
-  <meta name="description" content="sell-a-maze:  an Encode x StarkNet Hackathon project" />
-  <meta name="author" content="Ladislav Sladecek">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/skeleton.css">
-    <script src="script.js"></script>
-  <link rel="icon" type="image/png" href="images/favicon.png">
+	<meta charset="utf-8">
+	<title>Buy a unique maze puzzle!</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+	<meta name="description" content="sell-a-maze:  an Encode x StarkNet Hackathon project" />
+	<meta name="author" content="Ladislav Sladecek">
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/skeleton.css">
+	<script src="script.js"></script>
+	<link rel="icon" type="image/png" href="images/favicon.png">
 </head>
 
 <body>
-  
-<div class="container">
-  <div class="row">
-    <div class="column">
-      <h5 style="line-height:1; margin-bottom:0">Buy a unique maze puzzle!</h5>
-      <p>an Encode x StarkNet Hackathon project</p>
-      
-      <div id="phase-main" class="phasesel">
-      <button onclick="setMazeSize('small')" id="size-small" class="button busize" type="button">SMALL 1¢</button>
-      <button onclick="setMazeSize('medium')" id="size-medium" class="button busize" type="button">MEDIUM 2¢</button>
-      <button onclick="setMazeSize('large')" id="size-large" class="button busize" type="button">LARGE 3¢</button>
-      <button onclick="setMazeSize('huge')" id="size-huge" class="button busize" type="button">HUGE 5¢</button>
-	<table>
-	  <tr>
-	    <th style="width:200pt">
-	    </th>
-	    <th style="width:200pt">
-	      <h5>Free</h5>
-	      <p>A solution need not exist.</p>
-	    </th>
-	    <th style="width:200pt">
-	      <h5>Solution guaranteed</h5>
-	      <p>You will receive a cryptographic guarantee that a solution exist.</p>
-	    </th>
-	  </tr>
-	  
-	  <tr>
-	    <td>
-	      <p>rectangular</p>
-	      <img src="images/rectangular.svg"/>
-	    </td>
-	    <td>
-	      <button onclick="getMaze('rectangular', false)" type="button">GET FREE!</button>
-	    </td>
-	    <td>
-	      <button onclick="getMaze('rectangular', true)" type="button">BUY</button>
-	    </td>
-	  </tr>
 
-	  <tr>
-	    <td>
-	      <p>triangular</p>
-	      <img src="images/triangular.svg"/>
-	    </td>
-	    <td>
-	      <button onclick="getMaze('triangular', false)" type="button">GET FREE!</button>
-	    </td>
-	    <td>
-	      <button onclick="getMaze('triangular', true)" type="button">BUY</button>
-	    </td>
-	  </tr>
+	<div class="container">
+		<div class="row">
+			<div class="column">
+				<h5 style="line-height:1; margin-bottom:0">Buy a unique maze puzzle!</h5>
+				<p>an Encode x StarkNet Hackathon project</p>
 
-	  <tr>
-	    <td>
-	      <p>circular</p>
-	      <img src="images/circular.svg"/>
-	    </td>
-	    <td>
-	      <button onclick="getMaze('circular', false)" type="button">GET FREE!</button>
-	    </td>
-	    <td>
-	      <button onclick="getMaze('circular', true)" type="button">BUY</button>
-	    </td>
-	  </tr>
+				<div id="phase-main" class="phasesel">
+					<button onclick="setMazeSize('Small')" id="size-Small" class="button busize" type="button">SMALL
+						1¢</button>
+					<button onclick="setMazeSize('Medium')" id="size-Medium" class="button busize" type="button">MEDIUM
+						2¢</button>
+					<button onclick="setMazeSize('Large')" id="size-Large" class="button busize" type="button">LARGE
+						3¢</button>
+					<button onclick="setMazeSize('Huge')" id="size-Huge" class="button busize" type="button">HUGE
+						5¢</button>
+					<table>
+						<tr>
+							<th style="width:200pt">
+							</th>
+							<th style="width:200pt">
+								<h5>Free</h5>
+								<p>A solution need not exist.</p>
+							</th>
+							<th style="width:200pt">
+								<h5>Solution guaranteed</h5>
+								<p>You will receive a cryptographic guarantee that a solution exist.</p>
+							</th>
+						</tr>
 
-	  <tr>
-	    <td>
-	      <p>hexagonal</p>
-	      <img src="images/hexagonal.svg"/>
-	    </td>
-	    <td>
-	      <button onclick="getMaze('hexagonal', false)" type="button">GET FREE!</button>
-	    </td>
-	    <td>
-	      <button onclick="getMaze('hexagonal', true)" type="button">BUY</button>
-	    </td>
-	  </tr>
+						<tr>
+							<td>
+								<p>rectangular</p>
+								<img src="images/rectangular.svg" />
+							</td>
+							<td>
+								<button onclick="getMaze('Rectangular', false)" type="button">GET FREE!</button>
+							</td>
+							<td>
+								<button onclick="getMaze('Rectangular', true)" type="button">BUY</button>
+							</td>
+						</tr>
 
-	  
-	</table>
+						<tr>
+							<td>
+								<p>triangular</p>
+								<img src="images/triangular.svg" />
+							</td>
+							<td>
+								<button onclick="getMaze('Triangular', false)" type="button">GET FREE!</button>
+							</td>
+							<td>
+								<button onclick="getMaze('Triangular', true)" type="button">BUY</button>
+							</td>
+						</tr>
+
+						<tr>
+							<td>
+								<p>circular</p>
+								<img src="images/circular.svg" />
+							</td>
+							<td>
+								<button onclick="getMaze('Circular', false)" type="button">GET FREE!</button>
+							</td>
+							<td>
+								<button onclick="getMaze('Circular', true)" type="button">BUY</button>
+							</td>
+						</tr>
+
+						<tr>
+							<td>
+								<p>hexagonal</p>
+								<img src="images/hexagonal.svg" />
+							</td>
+							<td>
+								<button onclick="getMaze('Hexagonal', false)" type="button">GET FREE!</button>
+							</td>
+							<td>
+								<button onclick="getMaze('Hexagonal', true)" type="button">BUY</button>
+							</td>
+						</tr>
+
+
+					</table>
+				</div>
+
+				<div id="phase-install" class="phasesel">
+					<h1>Install metamask!</h1>
+				</div>
+
+				<div id="phase-connect" class="phasesel">
+					<h1>Congratulation!</h1>
+					<p>
+						The users of this demo are extempted from the payment! You happy bastards will get any maze for
+						FREE!
+					</p>
+					<td>
+						<button onclick="setPhase('wait')" type="button">Go ahead</button>
+					</td>
+				</div>
+
+				<div id="phase-wait" class="phasesel">
+					<h1>Wait!</h1>
+				</div>
+
+				<div id="phase-done" class="phasesel">
+					<h1>Done!</h1>
+				</div>
+
+				<div id="phase-error" class="phasesel">
+					<h1>Internal error</h1>
+					<p>Please try again later.</p>
+				</div>
+			</div>
+		</div>
 	</div>
-      
-      <div id="phase-install" class="phasesel">
-	<h1>Install metamask!</h1>
-      </div>
-      
-      <div id="phase-connect" class="phasesel">
-	<h1>Connect metamask!</h1>
-      </div>
 
-      <div id="phase-wait" class="phasesel">
-	<h1>Wait!</h1>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<script type="text/javascript">
-  window.onload = initPage;
-</script>
+	<script type="text/javascript">
+		window.onload = initPage;
+	</script>
 
 </body>
+
 </html>
