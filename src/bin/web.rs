@@ -71,6 +71,7 @@ async fn main() -> std::io::Result<()> {
             .app_data(Data::clone(&queue_data))
             .service(handler::maze_post)
             .service(handler::maze_get)
+            .service(handler::file_get)
             .service(handler::version_get)
             .service(
                 fs::Files::new("/", "static")

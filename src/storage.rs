@@ -40,9 +40,14 @@ impl Storage {
         Ok(result)
     }
 
-    pub(crate) fn save_file(name: &str, content: Vec<u8>, mime_type: &str) {
+    pub fn save_file(name: &str, content: Vec<u8>, mime_type: &str) {
         Object::create_sync(BUCKET_NAME, content, name, mime_type).unwrap();
         
+    }
+
+    pub async fn load_file_async(name: &str) -> io::Result<Vec<u8>> {
+        let content = Object::download(BUCKET_NAME, name).await.unwrap();
+        Ok(content)
     }
 
 }

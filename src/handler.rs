@@ -1,5 +1,5 @@
-use std::str::FromStr;
 use actix_web::{self, get, post, web, HttpResponse};
+use std::str::FromStr;
 use uuid::Uuid;
 
 use crate::job::{Job, State};
@@ -42,6 +42,27 @@ pub async fn maze_get(path: web::Path<String>) -> HttpResponse {
         } else {
             HttpResponse::Ok().json(job_res.unwrap())
         }
+    }
+}
+
+#[get("/api/file/{name}")]
+pub async fn file_get(path: web::Path<String>) -> HttpResponse {
+    let name_str = path.into_inner();
+    let file_res = Storage::load_file_async(&name_str).await;
+    if file_res.is_err() {
+        log::error!("Cannot load {} from cloud storage", name_str);
+        HttpResponse::InternalServerError().finish()
+    } else {
+        let mime_type = if name_str.ends_with(".svg") {
+            "image/svg+xml"
+        } else {
+            "application/octet-stream"
+        };
+        HttpResponse::Ok()
+            .content_type(mime_type)
+            .header("accept-ranges", "bytes")
+            .header("content-disposition", format!("attachment; filename=\"{}\"",name_str))
+            .body(file_res.unwrap())
     }
 }
 

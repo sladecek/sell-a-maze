@@ -30,6 +30,8 @@ async function setPhase(ph) {
 	}
 	if (ph == "done") {
 		document.getElementById("guarantee-warning").style.display = maze.guaranteed ? "none" : "block";
+		document.getElementById("svg-slot").setAttribute("src",'api/file/' + maze.svg);
+
 	}
 }
 
