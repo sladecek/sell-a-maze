@@ -71,6 +71,9 @@ impl MazeMaker {
 
         Storage::save_file(&job.svg, svg.as_bytes().to_vec(), "image/svg+xml");
 
+        let pdf = svg2pdf::convert_str(&svg, svg2pdf::Options::default()).unwrap();
+        Storage::save_file(&job.pdf, pdf, "application/pdf");
+
         if !job.guaranteed {
             return;
         }
