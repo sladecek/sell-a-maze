@@ -48,7 +48,9 @@ pub struct Job {
     #[serde(default)]
     pub maze_structure: String,
     #[serde(default)]
-    pub maze_instance: String
+    pub maze_instance: String,
+    #[serde(default)]
+    pub protocol: String    
 }
 
 impl Job {

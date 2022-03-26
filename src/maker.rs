@@ -1,5 +1,6 @@
-use std::{fs::File, io::Write, process::Command};
+use log::info;
 use rand::Rng;
+use std::{fs::File, io::Write, process::Command};
 
 use crate::{
     cairo::CairoFiles,
@@ -8,8 +9,9 @@ use crate::{
     hexagonal_builder,
     job::{Job, MazeType, Size},
     rectangular_builder,
+    storage::Storage,
     svg_painter::paint_shapes,
-    triangular_builder, storage::Storage,
+    triangular_builder,
 };
 
 pub struct MazeMaker {}
@@ -59,38 +61,76 @@ impl MazeMaker {
         if !job.guaranteed {
             if rand::thread_rng().gen_range(1..7) <= 1 {
                 is_solvable = false;
-            } 
+            }
         }
         let instance = generator.generate(&graph, is_solvable);
 
-
         // paint as svg
         let with_solution = false;
-                let svg = paint_shapes(with_solution, &shapes, &instance);
+        let svg = paint_shapes(with_solution, &shapes, &instance);
 
-        Storage::save_file(&job.svg, svg.as_bytes().to_vec(), "image/svg+xml" );
+        Storage::save_file(&job.svg, svg.as_bytes().to_vec(), "image/svg+xml");
 
- 
-/*
+        if !job.guaranteed {
+            return;
+        }
+
         // save graph, instance, solution for cairo
         let cairo = CairoFiles::new(&graph);
-        cairo
-            .create_structure_file(format!("{}maze.mas", path_prefix), &graph)
+        let maze_structure = cairo
+            .create_structure_file(&graph)
             .expect("cannot write structure file");
-        cairo
-            .create_instance_file(format!("{}maze.mai", path_prefix), &graph, &instance)
+
+        {
+            let mut fms = File::create("work/maze.mas").unwrap();
+            fms.write(&maze_structure);
+        }
+
+        Storage::save_file(
+            &job.maze_structure,
+            maze_structure,
+            "application/octet-stream",
+        );
+
+        let maze_instance = cairo
+            .create_instance_file(&graph, &instance)
             .expect("cannot write instance file");
-        cairo
-            .create_path_file(format!("{}maze.map", path_prefix), &graph, &instance)
+
+        {
+            let mut fmi = File::create("work/maze.mai").unwrap();
+            fmi.write(&maze_instance);
+        }
+
+        Storage::save_file(
+            &job.maze_instance,
+            maze_instance,
+            "application/octet-stream",
+        );
+
+        let maze_path = cairo
+            .create_path_file(&graph, &instance)
             .expect("cannot write path file");
 
-        let output = 
-            Command::new("sh")
-                .arg("-c")
-                .arg("echo hello")
-                .output()
-                .expect("failed to execute process")
-        ;
-  */
-  }
+        {
+            let mut fmp = File::create("work/maze.map").unwrap();
+            fmp.write(&maze_path);
+        }
+        // Path is not stored. It is used localy to make proof.
+
+        let output = Command::new("bash")
+            .arg("-c")
+            .arg("work/validate.sh")
+            .output()
+            .expect("failed to execute 'work/validate.sh'");
+
+        log::info!("{:?}", output);
+        let protocol = format!("{:?}", output);
+
+        Storage::save_file(
+            &job.protocol,
+            protocol.as_bytes().to_vec(),
+            "text/plain",
+        );
+        
+    }
 }

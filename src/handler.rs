@@ -60,8 +60,8 @@ pub async fn file_get(path: web::Path<String>) -> HttpResponse {
         };
         HttpResponse::Ok()
             .content_type(mime_type)
-            .header("accept-ranges", "bytes")
-            .header("content-disposition", format!("attachment; filename=\"{}\"",name_str))
+            .append_header(("accept-ranges", "bytes"))
+            .append_header(("content-disposition", format!("attachment; filename=\"{}\"",name_str)))
             .body(file_res.unwrap())
     }
 }

@@ -35,8 +35,9 @@ async function setPhase(ph) {
 		document.getElementById("svg-slot").setAttribute("src",'api/file/' + maze.svg);
 		document.getElementById("svg-link").setAttribute("href", 'api/file/' + maze.svg);
 		document.getElementById("pdf-link").setAttribute("href", 'api/file/' + maze.pdf);
-		document.getElementById("pdf-mas").setAttribute("href", 'api/file/' + maze_structure);
-		document.getElementById("pdf-mai").setAttribute("href", 'api/file/' + maze_instance);
+		document.getElementById("mas-link").setAttribute("href", 'api/file/' + maze.maze_structure);
+		document.getElementById("mai-link").setAttribute("href", 'api/file/' + maze.maze_instance);
+		document.getElementById("protocol-link").setAttribute("href", 'api/file/' + maze.protocol);
 	}
 }
 

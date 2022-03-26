@@ -15,7 +15,8 @@ fn main() {
             svg: String::from("maze.svg"),
             pdf: String::from("maze.pdf"),
             maze_structure: String::from("maze.mas"),
-            maze_instance: String::from("maze.mai")
+            maze_instance: String::from("maze.mai"),
+            protocol: String::from("protocol.log")
         }
     );
     
