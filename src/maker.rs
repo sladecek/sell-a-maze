@@ -126,8 +126,13 @@ impl MazeMaker {
             .output()
             .expect("failed to execute 'work/validate.sh'");
 
-        log::info!("{:?}", output);
-        let protocol = format!("{:?}", output);
+        
+
+        let mut protocol = format!("{:?}", output);
+        log::info!("{:?}", protocol);
+        if output.status.success() {
+            protocol = String::from_utf8(output.stdout).unwrap();
+        }
 
         Storage::save_file(
             &job.protocol,
