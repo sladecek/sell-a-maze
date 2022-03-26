@@ -24,82 +24,63 @@
 				<p>an Encode x StarkNet Hackathon project</p>
 
 				<div id="phase-main" class="phasesel">
-					<button onclick="setMazeSize('Small')" id="size-Small" class="button busize" type="button">SMALL
-						1¢</button>
-					<button onclick="setMazeSize('Medium')" id="size-Medium" class="button busize" type="button">MEDIUM
-						2¢</button>
-					<button onclick="setMazeSize('Large')" id="size-Large" class="button busize" type="button">LARGE
-						3¢</button>
-					<button onclick="setMazeSize('Huge')" id="size-Huge" class="button busize" type="button">HUGE
-						5¢</button>
-					<table>
-						<tr>
-							<th style="width:200pt">
-							</th>
-							<th style="width:200pt">
-								<h5>Free</h5>
-								<p>A solution need not exist.</p>
-							</th>
-							<th style="width:200pt">
-								<h5>Solution guaranteed</h5>
-								<p>You will receive a cryptographic guarantee that a solution exist.</p>
-							</th>
-						</tr>
+					<div style="text-align: center; width: 100%">
+						<button onclick="setMazeSize('Small')" id="size-Small" class="button busize" type="button">SMALL
+							1¢</button>
+						<button onclick="setMazeSize('Medium')" id="size-Medium" class="button busize"
+							type="button">MEDIUM
+							2¢</button>
+						<button onclick="setMazeSize('Large')" id="size-Large" class="button busize" type="button">LARGE
+							3¢</button>
+						<button onclick="setMazeSize('Huge')" id="size-Huge" class="button busize" type="button">HUGE
+							5¢</button>
+					</div>
+					<table style="width:100%;">
 
 						<tr>
-							<td>
-								<p>rectangular</p>
-								<img src="images/rectangular.svg" />
+							<td><button style="border:0pt;font-size:24pt;" onclick="moveMazeType(-1)">&#9664;</button>
 							</td>
-							<td>
-								<button onclick="getMaze('Rectangular', false)" type="button">GET FREE!</button>
+							<td style="width: 60%">
+								<div id="type-Rectangular" class="typesel">
+									<h2>Rectangular</h2>
+									<img height="400" src="images/rectangular.svg" />
+								</div>
+								<div id="type-Triangular" class="typesel">
+									<h2>Triangular</h2>
+									<img height="400" src="images/triangular.svg" />
+								</div>
+								<div id="type-Circular" class="typesel">
+									<h2>Circular</h2>
+									<img height="400" src="images/circular.svg" />
+								</div>
+								<div id="type-Hexagonal" class="typesel">
+									<h2>Hexagonal</h2>
+									<img height="400" src="images/hexagonal.svg" />
+								</div>
 							</td>
-							<td>
-								<button onclick="getMaze('Rectangular', true)" type="button">BUY</button>
+
+
+							<td><button style="border:0pt;font-size:24pt;" onclick="moveMazeType(1)">&#9654;</button>
 							</td>
 						</tr>
-
-						<tr>
-							<td>
-								<p>triangular</p>
-								<img src="images/triangular.svg" />
-							</td>
-							<td>
-								<button onclick="getMaze('Triangular', false)" type="button">GET FREE!</button>
-							</td>
-							<td>
-								<button onclick="getMaze('Triangular', true)" type="button">BUY</button>
-							</td>
-						</tr>
-
-						<tr>
-							<td>
-								<p>circular</p>
-								<img src="images/circular.svg" />
-							</td>
-							<td>
-								<button onclick="getMaze('Circular', false)" type="button">GET FREE!</button>
-							</td>
-							<td>
-								<button onclick="getMaze('Circular', true)" type="button">BUY</button>
-							</td>
-						</tr>
-
-						<tr>
-							<td>
-								<p>hexagonal</p>
-								<img src="images/hexagonal.svg" />
-							</td>
-							<td>
-								<button onclick="getMaze('Hexagonal', false)" type="button">GET FREE!</button>
-							</td>
-							<td>
-								<button onclick="getMaze('Hexagonal', true)" type="button">BUY</button>
-							</td>
-						</tr>
-
 
 					</table>
+
+					<div style="text-align: center;">
+						<table style="width:100%;">
+							<tr>
+								<td style="width: 27%">
+									<button onclick="getMaze(false)" type="button">GET FREE!</button><br />A
+									solution need not exist.
+								</td>
+								<td>
+									<button onclick="getMaze(true)" type="button">BUY</button><br />Solution
+									guaranteed.<br />
+									You will receive a cryptographic guarantee that a solution exist.
+								</td>
+							</tr>
+						</table>
+					</div>
 				</div>
 
 				<div id="phase-install" class="phasesel">

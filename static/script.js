@@ -1,20 +1,35 @@
-var mazeSize = 'Medium';
+var mazeType;
+var mazeSize;
 var phase = 'main';
 var request = {};
 var id;
 var maze = {};
 
 let initPage = function () {
+	setMazeType('Rectangular')
 	setMazeSize('Medium');
 	setPhase('main');
 	Spinner();
 	Spinner.hide();
 }
 
+let moveMazeType = function(delta) {
+	const types = ["Rectangular", "Triangular", "Circular", "Hexagonal"];
+	const sz = types.length;
+	var i = (types.indexOf(mazeType) + delta + sz) % sz;
+	setMazeType(types[i]);
+}
+
+let setMazeType = function (tp) {
+	mazeType = tp;
+	for (const b of document.getElementsByClassName("typesel")) { b.style.display = "none"; }
+	document.getElementById("type-" + tp).style.display = "block";
+}
+
 let setMazeSize = function (sz) {
 	mazeSize = sz;
 	for (const b of document.getElementsByClassName("busize")) { b.style.background = "white"; }
-	document.getElementById("size-" + sz).style.background = "#ff0000";
+	document.getElementById("size-" + sz).style.background = "#ddd";
 }
 
 async function setPhase(ph) {
@@ -80,7 +95,7 @@ async function subscribe() {
 	}
 }
 
-let getMaze = function (mazeType, guaranteed) {
+let getMaze = function (guaranteed) {
 	request = {
 		guaranteed: guaranteed,
 		payment: "free",
