@@ -39,7 +39,7 @@ fn process_job(id: &Uuid, job: &mut Job) -> bool {
 async fn main() -> std::io::Result<()> {
     std::env::set_var(
         "SERVICE_ACCOUNT",
-        "work/grand-kingdom-344016-e5104993a6aa.json",
+        "work/secret-key.json",
     );
     std::env::set_var("RUST_LOG", "actix_web=debug");
     std::env::set_var("RUST_LOG", "debug");
