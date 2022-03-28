@@ -21,7 +21,7 @@ impl MazeMaker {
         let (graph, shapes) = match job.maze_type {
             MazeType::Rectangular => {
                 let (w, h) = match job.size {
-                    Size::Small => (10, 7),
+                    Size::Small => (10, 6),
                     Size::Medium => (15, 10),
                     Size::Large => (20, 15),
                     Size::Huge => (40, 20),
