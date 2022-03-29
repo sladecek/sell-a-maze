@@ -93,7 +93,7 @@ async fn main() -> std::io::Result<()> {
                     .use_last_modified(true),
             )
     })
-    .bind("0.0.0.0:2705")?
+    .bind("0.0.0.0:80")?
     .run()
     .await
 }
