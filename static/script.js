@@ -68,13 +68,13 @@ async function callPost() {
 	id = await response.json();
 	console.log(id);
 
-	subscribe();
+	checkResult();
 }
 
-async function subscribe() {
-	console.log("subscribe");
+async function checkResult() {
+	console.log("checkResult");
 	let response = await fetch('api/maze/' + id);
-	console.log("subscribe response " + response.status);
+	console.log("checkResult response " + response.status);
 
 	if (response.status != 200) {
 		console.log(response.statusText);
@@ -90,7 +90,7 @@ async function subscribe() {
 		} else {
 			console.log(" next poll");
 			await new Promise(resolve => setTimeout(resolve, 1000));
-			await subscribe();
+			await checkResult();
 		}
 	}
 }
