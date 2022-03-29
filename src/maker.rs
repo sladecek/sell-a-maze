@@ -128,10 +128,10 @@ impl MazeMaker {
 
         let mut protocol = format!("{:?}", output);
         log::info!("{:?}", protocol);
-        let mut result = true;
+        let mut result = false;
         if output.status.success() {
             protocol = String::from_utf8(output.stdout).unwrap();
-            result = false;
+            result = true;
         }
 
         Storage::save_file(&job.protocol, protocol.as_bytes().to_vec(), "text/plain");
