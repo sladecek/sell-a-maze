@@ -3,8 +3,6 @@ if which cairo-compile; then
 else 
   source ~/cairo_venv/bin/activate
 fi
-set -x -e
-pwd
 pushd work
 cairo-compile ../static/samic.cairo --output samic.json
 cairo-run --program=samic.json --layout=small --print_output

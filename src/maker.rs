@@ -1,4 +1,4 @@
-use log::info;
+
 use rand::Rng;
 use std::{fs::File, io::Write, process::Command};
 
@@ -17,7 +17,7 @@ use crate::{
 pub struct MazeMaker {}
 
 impl MazeMaker {
-    pub fn make(job: &Job) {
+    pub fn make(job: &Job) -> bool {
         let (graph, shapes) = match job.maze_type {
             MazeType::Rectangular => {
                 let (w, h) = match job.size {
@@ -75,7 +75,7 @@ impl MazeMaker {
         Storage::save_file(&job.pdf, pdf, "application/pdf");
 
         if !job.guaranteed {
-            return;
+            return true;
         }
 
         // save graph, instance, solution for cairo
@@ -86,7 +86,7 @@ impl MazeMaker {
 
         {
             let mut fms = File::create("work/maze.mas").unwrap();
-            fms.write(&maze_structure);
+            fms.write(&maze_structure).expect("cannot write maze structure");
         }
 
         Storage::save_file(
@@ -101,7 +101,7 @@ impl MazeMaker {
 
         {
             let mut fmi = File::create("work/maze.mai").unwrap();
-            fmi.write(&maze_instance);
+            fmi.write(&maze_instance).expect("cannot write maze instance");
         }
 
         Storage::save_file(
@@ -116,9 +116,9 @@ impl MazeMaker {
 
         {
             let mut fmp = File::create("work/maze.map").unwrap();
-            fmp.write(&maze_path);
+            fmp.write(&maze_path).expect("cannot write maze path");
         }
-        // Path is not stored. It is used localy to make proof.
+        // Path is not stored. It is only used localy to make the proof.
 
         let output = Command::new("bash")
             .arg("-c")
@@ -126,19 +126,15 @@ impl MazeMaker {
             .output()
             .expect("failed to execute 'work/validate.sh'");
 
-        
-
         let mut protocol = format!("{:?}", output);
         log::info!("{:?}", protocol);
+        let mut result = true;
         if output.status.success() {
             protocol = String::from_utf8(output.stdout).unwrap();
+            result = false;
         }
 
-        Storage::save_file(
-            &job.protocol,
-            protocol.as_bytes().to_vec(),
-            "text/plain",
-        );
-        
+        Storage::save_file(&job.protocol, protocol.as_bytes().to_vec(), "text/plain");
+        result
     }
 }

@@ -28,8 +28,8 @@ fn process_job(id: &Uuid, job: &mut Job) -> bool {
             job.maze_instance = format!("{}.mai", id_str);
             job.protocol = format!("cairo_log_{}.txt", id_str);
         }
-        MazeMaker::make(job);
-        job.state = State::Done;
+        let ok = MazeMaker::make(job);
+        job.state = if ok {State::Done} else {State::Error};
         return true;
     }
     false
