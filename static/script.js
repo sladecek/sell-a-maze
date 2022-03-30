@@ -13,7 +13,7 @@ let initPage = function () {
 	Spinner.hide();
 }
 
-let moveMazeType = function(delta) {
+let moveMazeType = function (delta) {
 	const types = ["Rectangular", "Triangular", "Circular", "Hexagonal"];
 	const sz = types.length;
 	var i = (types.indexOf(mazeType) + delta + sz) % sz;
@@ -44,10 +44,10 @@ async function setPhase(ph) {
 		await callPost();
 	}
 	if (ph == "done") {
-		
+
 		document.getElementById("guarantee-warning").style.display = maze.guaranteed ? "none" : "block";
 		document.getElementById("proof").style.display = maze.guaranteed ? "block" : "none";
-		document.getElementById("svg-slot").setAttribute("src",'api/file/' + maze.svg);
+		document.getElementById("svg-slot").setAttribute("src", 'api/file/' + maze.svg);
 		document.getElementById("svg-link").setAttribute("href", 'api/file/' + maze.svg);
 		document.getElementById("pdf-link").setAttribute("href", 'api/file/' + maze.pdf);
 		document.getElementById("mas-link").setAttribute("href", 'api/file/' + maze.maze_structure);
@@ -57,41 +57,52 @@ async function setPhase(ph) {
 }
 
 async function callPost() {
-	let response = await fetch('api/maze', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json;charset=utf-8'
-		},
-		body: JSON.stringify(request)
-	});
+	try {
+		let response = await fetch('api/maze', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json;charset=utf-8'
+			},
+			body: JSON.stringify(request)
+		});
 
-	id = await response.json();
-	console.log(id);
+		id = await response.json();
+		console.log(id);
 
-	checkResult();
+		checkResult();
+
+	} catch (e) {
+		console.error(e);
+		setPhase("error");
+	}
 }
 
 async function checkResult() {
 	console.log("checkResult");
-	let response = await fetch('api/maze/' + id);
-	console.log("checkResult response " + response.status);
+	try {
+		let response = await fetch('api/maze/' + id);
+		console.log("checkResult response " + response.status);
 
-	if (response.status != 200) {
-		console.log(response.statusText);
-		changeState("error");
-	} else {
-		let message = await response.text();
-		maze = JSON.parse(message);
-		console.log(maze);
-		if (maze.state == "Done") {
-			await setPhase("done");
-		} else if (maze.state == "Error") {
-			await setPhase("error");
+		if (response.status != 200) {
+			console.log(response.statusText);
+			setPhase("error");
 		} else {
-			console.log(" next poll");
-			await new Promise(resolve => setTimeout(resolve, 1000));
-			await checkResult();
+			let message = await response.text();
+			maze = JSON.parse(message);
+			console.log(maze);
+			if (maze.state == "Done") {
+				await setPhase("done");
+			} else if (maze.state == "Error") {
+				await setPhase("error");
+			} else {
+				console.log(" next poll");
+				await new Promise(resolve => setTimeout(resolve, 1000));
+				await checkResult();
+			}
 		}
+	} catch (e) {
+		console.error(e);
+		setPhase("error");
 	}
 }
 
