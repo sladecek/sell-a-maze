@@ -29,7 +29,7 @@ fn process_job(id: &Uuid, job: &mut Job) -> bool {
             job.protocol = format!("cairo_log_{}.txt", id_str);
         }
         let ok = MazeMaker::make(job);
-        job.state = if ok {State::Done} else {State::Error};
+        job.state = if ok { State::Done } else { State::Error };
         return true;
     }
     false
@@ -37,10 +37,7 @@ fn process_job(id: &Uuid, job: &mut Job) -> bool {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    std::env::set_var(
-        "SERVICE_ACCOUNT",
-        "work/secret-key.json",
-    );
+    std::env::set_var("SERVICE_ACCOUNT", "work/secret-key.json");
     std::env::set_var("RUST_LOG", "actix_web=debug");
     std::env::set_var("RUST_LOG", "debug");
     env_logger::init();
@@ -53,6 +50,10 @@ async fn main() -> std::io::Result<()> {
 
     let sd2 = queue_data.clone();
     let _worker_thread = spawn(move || loop {
+
+        let delay = time::Duration::from_millis(1);
+        thread::sleep(delay);
+
         let item = sd2.uids.lock().unwrap().pop_front();
         if item.is_some() {
             let id = item.unwrap();
@@ -71,9 +72,6 @@ async fn main() -> std::io::Result<()> {
             }
             if job.is_in_progress() {
                 sd2.uids.lock().unwrap().push_back(id);
-
-                let ten_millis = time::Duration::from_millis(10);
-                thread::sleep(ten_millis)
             }
         }
     });
