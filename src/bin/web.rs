@@ -3,15 +3,17 @@ use actix_web::{self, middleware::Logger, web::Data, App, HttpServer};
 use env_logger;
 use sell_a_maze::{
     handler,
-    job::{Job, State},
+    job::{Job, State, MazeType},
     maker::MazeMaker,
     queue::Queue,
     storage::Storage,
 };
-use std::thread::spawn;
+use std::{thread::spawn, panic, process};
 use std::{collections::VecDeque, sync::Mutex};
 use std::{thread, time};
 use uuid::Uuid;
+
+
 
 fn process_job(id: &Uuid, job: &mut Job) -> bool {
     if job.state == State::WaitingForPayment {
@@ -28,6 +30,9 @@ fn process_job(id: &Uuid, job: &mut Job) -> bool {
             job.maze_instance = format!("{}.mai", id_str);
             job.protocol = format!("cairo_log_{}.txt", id_str);
         }
+        if job.maze_type == MazeType::Triangular {
+            panic!("test");
+        }
         let ok = MazeMaker::make(job);
         job.state = if ok { State::Done } else { State::Error };
         return true;
@@ -41,6 +46,13 @@ async fn main() -> std::io::Result<()> {
     std::env::set_var("RUST_LOG", "actix_web=debug");
     std::env::set_var("RUST_LOG", "debug");
     env_logger::init();
+
+    let orig_hook = panic::take_hook();
+    panic::set_hook(Box::new(move |panic_info| {
+        orig_hook(panic_info);
+        process::exit(1);
+    }));
+
 
     // Worker thread makes mazes one by
     let queue = Queue {

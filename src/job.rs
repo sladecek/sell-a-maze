@@ -23,7 +23,7 @@ pub enum Size {
     Huge,
 }
 
-#[derive(Debug, Clone, Copy, Serialize, Deserialize)]
+#[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq, Eq)]
 pub enum MazeType {
     Rectangular,
     Circular,
