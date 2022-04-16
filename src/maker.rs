@@ -61,7 +61,7 @@ impl MazeMaker {
         
         // Spoil some percentage of the mazes if the user havn't paid for the guaranteed version.
         if !job.guaranteed {
-            let dice = rand::thread_rng().gen_range(1..7)
+            let dice = rand::thread_rng().gen_range(1..7);
             if dice <= 1 {
                 is_solvable = false;
             }

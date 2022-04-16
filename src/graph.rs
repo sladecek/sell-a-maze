@@ -58,9 +58,9 @@ impl Graph {
         let r1 = self.wall_room1[wall as usize];
         let r2 = self.wall_room2[wall as usize];
         if r1 == room {
-            return r2;
+            r2
         } else if r2 == room {
-            return r1;
+            r1
         } else {
             panic!("unknown room");
         }
