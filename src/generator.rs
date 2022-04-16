@@ -66,7 +66,7 @@ impl Generator {
         }
 
         if !is_solvable {
-            self.destroy_solution(&mut result, &graph);
+            self.destroy_solution(&mut result, graph);
         }
         result
     }
@@ -81,7 +81,7 @@ impl Generator {
                 }
             }
         }
-        return candidates;
+        candidates
     }
 
     fn visit_room(&mut self, room: i32) {
