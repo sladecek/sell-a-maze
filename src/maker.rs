@@ -58,8 +58,11 @@ impl MazeMaker {
         };
         let mut generator = Generator::new();
         let mut is_solvable = true;
+        
+        // Spoil some percentage of the mazes if the user havn't paid for the guaranteed version.
         if !job.guaranteed {
-            if rand::thread_rng().gen_range(1..7) <= 1 {
+            let dice = rand::thread_rng().gen_range(1..7);
+            if dice <= 1 {
                 is_solvable = false;
             }
         }

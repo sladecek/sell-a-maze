@@ -124,17 +124,7 @@ impl RowBuilder {
                     self.my_first = r;
                 }
                 self.last_room = r;
-                //LOGGER.log(Level.FINE, "addRoom " + r + " y=" + y + " j=" + j + " prevRoom=" + prevRoom +
-                //      " myFirst=" + myFirst + " prevFirst=" + prevFirst + " lastRoom=" + lastRoom);
-
-                shapes.add_floor(r, RSX * x2, RSY * self.y + RSY / 2);
-                /*
-                                  final Point2DInt position = new Point2DInt(r);
-                                  //final MarkShape mark = new MarkShape(r, position);
-                                  shapes.add (mark);
-                                  final FloorShape floor = new FloorShape(r, position);
-                                  allShapes.add(floor);
-                */
+                  shapes.add_floor(r, RSX * x2, RSY * self.y + RSY / 2);
             }
 
             if new_room_is_right {
@@ -145,4 +135,12 @@ impl RowBuilder {
             self.prev_room = r;
         }
     }
+}
+
+#[test]
+fn size_is_correct() {
+   let bld = Builder::new(1);
+   let (_, shapes) = bld.build();
+   assert_eq!(200, shapes.height);
+   assert_eq!(240, shapes.width);
 }
